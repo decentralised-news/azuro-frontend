@@ -27,7 +27,7 @@ type BettingTip = {
 }
 
 const TabbedBetslip: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<typeof tabs[number]>('bettingTips')
+  const [ activeTab, setActiveTab ] = useState<typeof tabs[number]>('bettingTips')
 
   const bettingTips: BettingTip[] = [
     {
@@ -71,13 +71,15 @@ const TabbedBetslip: React.FC = () => {
   const renderStars = (count: number) => {
     return (
       <div className="flex items-center">
-        { [ ...Array(5) ].map((_, i) => (
+        { 
+        [ ...Array(5) ].map((_, i) => (
           <Icon
             key={i}
             name="interface/win"
             className={`w-3 h-3 ${i < count ? 'text-yellow-400' : 'text-gray-300'}`}
           />
-        )) }
+        ))
+        }
       </div>
     )
   }
@@ -85,25 +87,30 @@ const TabbedBetslip: React.FC = () => {
   return (
     <>
       <div className="bg-bg-l0 rounded-md border border-grey-15 p-1 flex items-center">
-        {tabs.map((tab) => {
+        {
+        tabs.map((tab) => {
           const isActive = activeTab === tab
 
           return (
             <button
               key={tab}
-              className={cx('w-full p-2 text-center rounded-sm', {
+              className={
+                cx('w-full p-2 text-center rounded-sm', {
                 'text-grey-60 hover:text-grey-90': !isActive,
                 'text-grey-90 bg-grey-10': isActive,
-              })}
+              })
+            }
               onClick={() => setActiveTab(tab)}
             >
               <Message value={messages[tab]} />
             </button>
           )
-        })}
+        })
+        }
       </div>
 
-      {activeTab === 'bettingTips' && (
+      {
+      activeTab === 'bettingTips' && (
         <div className="mt-4">
           <div className="bg-bg-l0 rounded-md border border-grey-15 overflow-hidden">
             <div className="grid grid-cols-12 bg-grey-10 p-3 text-caption-12 font-semibold text-grey-70">
@@ -125,7 +132,8 @@ const TabbedBetslip: React.FC = () => {
             </div>
 
             <div className="divide-y divide-grey-15 max-h-[28rem] overflow-auto no-scrollbar">
-              {bettingTips.map((tip) => (
+              {
+              bettingTips.map((tip) => (
                 <div
                   key={tip.id}
                   className="grid grid-cols-12 p-3 hover:bg-grey-10 transition-colors"
@@ -156,7 +164,8 @@ const TabbedBetslip: React.FC = () => {
                     <span className="text-caption-12 text-grey-60">{tip.time}</span>
                   </div>
                 </div>
-              ))}
+              ))
+              }
             </div>
           </div>
 
@@ -179,7 +188,8 @@ const TabbedBetslip: React.FC = () => {
             </div>
           </div>
         </div>
-      )}
+      )
+      }
 
       {activeTab === 'betslip' && <Betslip />}
       {activeTab === 'myBets' && <AcceptedBets />}
@@ -188,8 +198,6 @@ const TabbedBetslip: React.FC = () => {
 }
 
 export default TabbedBetslip
-
-
 
 // 'use client'
 
