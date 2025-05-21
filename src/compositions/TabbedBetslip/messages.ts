@@ -1,27 +1,27 @@
 export default {
-   bettingTips: {
+  bettingTips: {
     id: 'bettingTips',
-    defaultMessage: 'Betting Tips'
+    defaultMessage: 'Betting Tips',
   },
   league: {
     id: 'league',
-    defaultMessage: 'League'
+    defaultMessage: 'League',
   },
   match: {
     id: 'match',
-    defaultMessage: 'Match'
+    defaultMessage: 'Match',
   },
   tip: {
     id: 'tip',
-    defaultMessage: 'Tip'
+    defaultMessage: 'Tip',
   },
   odds: {
     id: 'odds',
-    defaultMessage: 'Odds'
+    defaultMessage: 'Odds',
   },
   date: {
     id: 'date',
-    defaultMessage: 'Date'
+    defaultMessage: 'Date',
   },
   betslip: {
     en: 'Betslip',

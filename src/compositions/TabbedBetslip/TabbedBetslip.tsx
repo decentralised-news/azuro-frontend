@@ -5,29 +5,30 @@ import { Message } from '@locmod/intl'
 import cx from 'classnames'
 import dayjs from 'dayjs'
 
+import { Icon } from 'components/ui'
 import Betslip from 'compositions/Betslip/Betslip'
 import AcceptedBets from 'compositions/AcceptedBets/AcceptedBets'
-import { Icon } from 'components/ui'
+
 
 import messages from './messages'
 
-const tabs = ['bettingTips', 'betslip', 'myBets'] as const
+const tabs = [ 'bettingTips', 'betslip', 'myBets' ] as const
 
 type BettingTip = {
-  id: string
-  league: string
-  match: string
-  homeTeam: string
-  awayTeam: string
-  tip: string
-  odds: number
-  date: string
-  time: string
-  confidence: number // 1-5 stars
+  id: string,
+  league: string,
+  match: string,
+  homeTeam: string,
+  awayTeam: string,
+  tip: string,
+  odds: number,
+  date: string,
+  time: string,
+  confidence: number, // 1-5 stars
 }
 
 const TabbedBetslip: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<typeof tabs[number]>('bettingTips')
+  const [ activeTab, setActiveTab ] = useState<typeof tabs[number]>('bettingTips')
   
   // Sample betting tips data - replace with your actual data source
   const bettingTips: BettingTip[] = [
@@ -41,7 +42,7 @@ const TabbedBetslip: React.FC = () => {
       odds: 1.85,
       date: dayjs().format('DD.MM.YYYY'),
       time: '20:00',
-      confidence: 4
+      confidence: 4,
     },
     {
       id: '2',
@@ -53,7 +54,7 @@ const TabbedBetslip: React.FC = () => {
       odds: 1.65,
       date: dayjs().add(1, 'day').format('DD.MM.YYYY'),
       time: '21:00',
-      confidence: 5
+      confidence: 5,
     },
     {
       id: '3',
@@ -65,14 +66,14 @@ const TabbedBetslip: React.FC = () => {
       odds: 2.10,
       date: dayjs().add(2, 'day').format('DD.MM.YYYY'),
       time: '19:45',
-      confidence: 3
-    }
+      confidence: 3,
+    },
   ]
 
   const renderStars = (count: number) => {
     return (
       <div className="flex items-center">
-        {[...Array(5)].map((_, i) => (
+        {[ ...Array(5) ].map((_, i) => (
           <Icon
             key={i}
             name="interface/win"
