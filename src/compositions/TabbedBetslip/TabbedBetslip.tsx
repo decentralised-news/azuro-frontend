@@ -145,7 +145,7 @@ const TabbedBetslip: React.FC = () => {
           [ ...Array(5) ].map((_, i) => (
             <Icon
               key={i}
-              name="interface/win"
+              name="interface/star"
               className={`w-2.5 h-2.5 ${i < count ? 'text-yellow-400' : 'text-gray-300'}`}
             />
           ))
