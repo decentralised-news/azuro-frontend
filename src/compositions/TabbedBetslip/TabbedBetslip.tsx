@@ -8,10 +8,10 @@ import dayjs from 'dayjs'
 import { Icon } from 'components/ui'
 import Betslip from 'compositions/Betslip/Betslip'
 import AcceptedBets from 'compositions/AcceptedBets/AcceptedBets'
-
 import messages from './messages'
 
-const tabs = ['bettingTips', 'betslip', 'myBets'] as const
+
+const tabs = [ 'bettingTips', 'betslip', 'myBets' ] as const
 
 type BettingTip = {
   id: string
@@ -40,7 +40,7 @@ const TabbedBetslip: React.FC = () => {
       odds: 1.85,
       date: dayjs().format('DD.MM.YYYY'),
       time: '20:00',
-      confidence: 4
+      confidence: 4,
     },
     {
       id: '2',
@@ -52,7 +52,7 @@ const TabbedBetslip: React.FC = () => {
       odds: 1.65,
       date: dayjs().add(1, 'day').format('DD.MM.YYYY'),
       time: '21:00',
-      confidence: 5
+      confidence: 5,
     },
     {
       id: '3',
@@ -64,20 +64,20 @@ const TabbedBetslip: React.FC = () => {
       odds: 2.10,
       date: dayjs().add(2, 'day').format('DD.MM.YYYY'),
       time: '19:45',
-      confidence: 3
-    }
+      confidence: 3,
+    },
   ]
 
   const renderStars = (count: number) => {
     return (
       <div className="flex items-center">
-        {[...Array(5)].map((_, i) => (
+        { [ ...Array(5) ].map((_, i) => (
           <Icon
             key={i}
             name="interface/win"
             className={`w-3 h-3 ${i < count ? 'text-yellow-400' : 'text-gray-300'}`}
           />
-        ))}
+        )) }
       </div>
     )
   }
@@ -93,7 +93,7 @@ const TabbedBetslip: React.FC = () => {
               key={tab}
               className={cx('w-full p-2 text-center rounded-sm', {
                 'text-grey-60 hover:text-grey-90': !isActive,
-                'text-grey-90 bg-grey-10': isActive
+                'text-grey-90 bg-grey-10': isActive,
               })}
               onClick={() => setActiveTab(tab)}
             >
@@ -188,6 +188,7 @@ const TabbedBetslip: React.FC = () => {
 }
 
 export default TabbedBetslip
+
 
 
 // 'use client'
