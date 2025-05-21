@@ -10,6 +10,7 @@ import Betslip from 'compositions/Betslip/Betslip'
 import AcceptedBets from 'compositions/AcceptedBets/AcceptedBets'
 import messages from './messages'
 
+
 const tabs = [ 'bettingTips', 'betslip', 'myBets' ] as const
 
 type BettingTip = {
