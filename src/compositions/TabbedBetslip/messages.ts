@@ -1,28 +1,25 @@
 export default {
+  // New betting tips messages following your existing pattern
   bettingTips: {
-    id: 'bettingTips',
-    defaultMessage: 'Betting Tips',
+    en: 'Betting Tips',
   },
   league: {
-    id: 'league',
-    defaultMessage: 'League',
+    en: 'League',
   },
   match: {
-    id: 'match',
-    defaultMessage: 'Match',
+    en: 'Match',
   },
   tip: {
-    id: 'tip',
-    defaultMessage: 'Tip',
+    en: 'Tip',
   },
   odds: {
-    id: 'odds',
-    defaultMessage: 'Odds',
+    en: 'Odds',
   },
   date: {
-    id: 'date',
-    defaultMessage: 'Date',
+    en: 'Date',
   },
+  
+  // Your original messages
   betslip: {
     en: 'Betslip',
   },
