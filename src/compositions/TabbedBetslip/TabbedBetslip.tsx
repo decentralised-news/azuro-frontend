@@ -11,7 +11,7 @@ import AcceptedBets from 'compositions/AcceptedBets/AcceptedBets'
 import messages from './messages'
 
 
-const tabs = ['bettingTips', 'betslip', 'myBets'] as const
+const tabs = [ 'bettingTips', 'betslip', 'myBets' ] as const
 
 type BettingTip = {
   id: string
@@ -27,7 +27,7 @@ type BettingTip = {
 }
 
 const TabbedBetslip: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<typeof tabs[number]>('bettingTips')
+  const [ activeTab, setActiveTab ] = useState<typeof tabs[number]>('bettingTips')
 
   const bettingTips: BettingTip[] = [
     {
@@ -72,7 +72,7 @@ const TabbedBetslip: React.FC = () => {
     return (
       <div className="flex items-center">
         {
-          [...Array(5)].map((_, i) => (
+          [ ...Array(5) ].map((_, i) => (
             <Icon
               key={i}
               name="interface/win"
