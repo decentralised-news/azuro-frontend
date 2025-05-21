@@ -10,7 +10,7 @@ import Betslip from 'compositions/Betslip/Betslip'
 import AcceptedBets from 'compositions/AcceptedBets/AcceptedBets'
 import messages from './messages'
 
-const tabs = [ 'bettingTips', 'betslip', 'myBets' ] as const
+const tabs = ['bettingTips', 'betslip', 'myBets'] as const
 
 type BettingTip = {
   id: string
@@ -81,12 +81,12 @@ const TabbedBetslip: React.FC = () => {
               key={tab}
               className={
                 cx(
-                'flex-1 py-2 text-center text-xs transition-colors',
-                activeTab === tab
-                  ? 'bg-brand-10 text-brand-50'
-                  : 'text-grey-70 hover:bg-grey-10'
-              )
-            }
+                  'flex-1 py-2 text-center text-xs transition-colors',
+                  activeTab === tab
+                    ? 'bg-brand-10 text-brand-50'
+                    : 'text-grey-70 hover:bg-grey-10'
+                )
+              }
               onClick={() => setActiveTab(tab)}
             >
               <Message value={messages[tab]} />
@@ -97,64 +97,64 @@ const TabbedBetslip: React.FC = () => {
 
       {/* Betting Tips Content */}
       {
-      activeTab === 'bettingTips' && (
-        <div className="flex-1 overflow-hidden flex flex-col">
-          {/* Compact Header */}
-          <div className="grid grid-cols-12 bg-grey-10 p-2 text-[10px] font-semibold text-grey-70 tracking-tight">
-            <div className="col-span-4 px-1">Match</div>
-            <div className="col-span-3 px-1">Tip</div>
-            <div className="col-span-3 px-1 text-right">Odds</div>
-            <div className="col-span-2 px-1 text-right">Time</div>
-          </div>
+        activeTab === 'bettingTips' && (
+          <div className="flex-1 overflow-hidden flex flex-col">
+            {/* Compact Header */}
+            <div className="grid grid-cols-12 bg-grey-10 p-2 text-[10px] font-semibold text-grey-70 tracking-tight">
+              <div className="col-span-4 px-1">Match</div>
+              <div className="col-span-3 px-1">Tip</div>
+              <div className="col-span-3 px-1 text-right">Odds</div>
+              <div className="col-span-2 px-1 text-right">Time</div>
+            </div>
 
-          {/* Scrollable Tips List */}
-          <div className="flex-1 overflow-y-auto no-scrollbar divide-y divide-grey-15">
-            {
-              bettingTips.map((tip) => (
-                <div
-                  key={tip.id}
-                  className="grid grid-cols-12 p-2 hover:bg-grey-10 transition-colors"
-                >
-                  <div className="col-span-4 flex flex-col px-1">
-                    <span className="text-[11px] font-medium truncate">{tip.league}</span>
-                    <span className="text-[10px] text-grey-60 truncate">{tip.match}</span>
+            {/* Scrollable Tips List */}
+            <div className="flex-1 overflow-y-auto no-scrollbar divide-y divide-grey-15">
+              {
+                bettingTips.map((tip) => (
+                  <div
+                    key={tip.id}
+                    className="grid grid-cols-12 p-2 hover:bg-grey-10 transition-colors"
+                  >
+                    <div className="col-span-4 flex flex-col px-1">
+                      <span className="text-[11px] font-medium truncate">{tip.league}</span>
+                      <span className="text-[10px] text-grey-60 truncate">{tip.match}</span>
+                    </div>
+                    <div className="col-span-3 flex flex-col px-1">
+                      <span className="text-[11px] font-medium text-brand-50">{tip.tip}</span>
+                      {renderStars(tip.confidence)}
+                    </div>
+                    <div className="col-span-3 flex items-center justify-end px-1">
+                      <span className="text-[11px] font-bold text-accent-green">
+                        {tip.odds.toFixed(2)}
+                      </span>
+                    </div>
+                    <div className="col-span-2 flex items-center justify-end px-1">
+                      <span className="text-[10px] text-grey-60">{tip.time}</span>
+                    </div>
                   </div>
-                  <div className="col-span-3 flex flex-col px-1">
-                    <span className="text-[11px] font-medium text-brand-50">{tip.tip}</span>
-                    {renderStars(tip.confidence)}
-                  </div>
-                  <div className="col-span-3 flex items-center justify-end px-1">
-                    <span className="text-[11px] font-bold text-accent-green">
-                      {tip.odds.toFixed(2)}
-                    </span>
-                  </div>
-                  <div className="col-span-2 flex items-center justify-end px-1">
-                    <span className="text-[10px] text-grey-60">{tip.time}</span>
-                  </div>
+                ))
+              }
+            </div>
+
+            {/* Mini Stats Footer */}
+            <div className="bg-bg-l0 border-t border-grey-15 p-2">
+              <div className="grid grid-cols-3 gap-1 text-center text-[10px]">
+                <div className="bg-grey-10 rounded p-1">
+                  <div className="text-grey-70">Win Rate</div>
+                  <div className="font-bold text-accent-green">78%</div>
                 </div>
-              ))
-            }
-          </div>
-
-          {/* Mini Stats Footer */}
-          <div className="bg-bg-l0 border-t border-grey-15 p-2">
-            <div className="grid grid-cols-3 gap-1 text-center text-[10px]">
-              <div className="bg-grey-10 rounded p-1">
-                <div className="text-grey-70">Win Rate</div>
-                <div className="font-bold text-accent-green">78%</div>
-              </div>
-              <div className="bg-grey-10 rounded p-1">
-                <div className="text-grey-70">Avg Odds</div>
-                <div className="font-bold">1.85</div>
-              </div>
-              <div className="bg-grey-10 rounded p-1">
-                <div className="text-grey-70">Tips</div>
-                <div className="font-bold">24</div>
+                <div className="bg-grey-10 rounded p-1">
+                  <div className="text-grey-70">Avg Odds</div>
+                  <div className="font-bold">1.85</div>
+                </div>
+                <div className="bg-grey-10 rounded p-1">
+                  <div className="text-grey-70">Tips</div>
+                  <div className="font-bold">24</div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )
+        )
       }
 
       {/* Other Tabs */}
