@@ -11,7 +11,7 @@ import AcceptedBets from 'compositions/AcceptedBets/AcceptedBets'
 import messages from './messages'
 
 
-const tabs = [ 'bettingTips', 'betslip', 'myBets' ] as const
+const tabs = ['bettingTips', 'betslip', 'myBets'] as const
 
 type BettingTip = {
   id: string
@@ -27,7 +27,7 @@ type BettingTip = {
 }
 
 const TabbedBetslip: React.FC = () => {
-  const [ activeTab, setActiveTab ] = useState<typeof tabs[number]>('bettingTips')
+  const [activeTab, setActiveTab] = useState<typeof tabs[number]>('bettingTips')
 
   const bettingTips: BettingTip[] = [
     {
@@ -71,14 +71,14 @@ const TabbedBetslip: React.FC = () => {
   const renderStars = (count: number) => {
     return (
       <div className="flex items-center">
-        { 
-        [ ...Array(5) ].map((_, i) => (
-          <Icon
-            key={i}
-            name="interface/win"
-            className={`w-3 h-3 ${i < count ? 'text-yellow-400' : 'text-gray-300'}`}
-          />
-        ))
+        {
+          [...Array(5)].map((_, i) => (
+            <Icon
+              key={i}
+              name="interface/win"
+              className={`w-3 h-3 ${i < count ? 'text-yellow-400' : 'text-gray-300'}`}
+            />
+          ))
         }
       </div>
     )
@@ -88,107 +88,107 @@ const TabbedBetslip: React.FC = () => {
     <>
       <div className="bg-bg-l0 rounded-md border border-grey-15 p-1 flex items-center">
         {
-        tabs.map((tab) => {
-          const isActive = activeTab === tab
+          tabs.map((tab) => {
+            const isActive = activeTab === tab
 
-          return (
-            <button
-              key={tab}
-              className={
-                cx('w-full p-2 text-center rounded-sm', {
-                'text-grey-60 hover:text-grey-90': !isActive,
-                'text-grey-90 bg-grey-10': isActive,
-              })
-            }
-              onClick={() => setActiveTab(tab)}
-            >
-              <Message value={messages[tab]} />
-            </button>
-          )
-        })
+            return (
+              <button
+                key={tab}
+                className={
+                  cx('w-full p-2 text-center rounded-sm', {
+                    'text-grey-60 hover:text-grey-90': !isActive,
+                    'text-grey-90 bg-grey-10': isActive,
+                  })
+                }
+                onClick={() => setActiveTab(tab)}
+              >
+                <Message value={messages[tab]} />
+              </button>
+            )
+          })
         }
       </div>
 
       {
-      activeTab === 'bettingTips' && (
-        <div className="mt-4">
-          <div className="bg-bg-l0 rounded-md border border-grey-15 overflow-hidden">
-            <div className="grid grid-cols-12 bg-grey-10 p-3 text-caption-12 font-semibold text-grey-70">
-              <div className="col-span-3">
-                <Message value={messages.league} />
+        activeTab === 'bettingTips' && (
+          <div className="mt-4">
+            <div className="bg-bg-l0 rounded-md border border-grey-15 overflow-hidden">
+              <div className="grid grid-cols-12 bg-grey-10 p-3 text-caption-12 font-semibold text-grey-70">
+                <div className="col-span-3">
+                  <Message value={messages.league} />
+                </div>
+                <div className="col-span-4">
+                  <Message value={messages.match} />
+                </div>
+                <div className="col-span-2">
+                  <Message value={messages.tip} />
+                </div>
+                <div className="col-span-1">
+                  <Message value={messages.odds} />
+                </div>
+                <div className="col-span-2">
+                  <Message value={messages.date} />
+                </div>
               </div>
-              <div className="col-span-4">
-                <Message value={messages.match} />
-              </div>
-              <div className="col-span-2">
-                <Message value={messages.tip} />
-              </div>
-              <div className="col-span-1">
-                <Message value={messages.odds} />
-              </div>
-              <div className="col-span-2">
-                <Message value={messages.date} />
+
+              <div className="divide-y divide-grey-15 max-h-[28rem] overflow-auto no-scrollbar">
+                {
+                  bettingTips.map((tip) => (
+                    <div
+                      key={tip.id}
+                      className="grid grid-cols-12 p-3 hover:bg-grey-10 transition-colors"
+                    >
+                      <div className="col-span-3 flex items-center">
+                        <span className="text-caption-13 font-medium truncate">
+                          {tip.league}
+                        </span>
+                      </div>
+                      <div className="col-span-4 flex items-center">
+                        <span className="text-caption-13 font-medium truncate">
+                          {tip.homeTeam} vs {tip.awayTeam}
+                        </span>
+                      </div>
+                      <div className="col-span-2 flex flex-col">
+                        <span className="text-caption-13 font-medium text-brand-50">
+                          {tip.tip}
+                        </span>
+                        {renderStars(tip.confidence)}
+                      </div>
+                      <div className="col-span-1 flex items-center">
+                        <span className="text-caption-13 font-bold text-accent-green">
+                          {tip.odds.toFixed(2)}
+                        </span>
+                      </div>
+                      <div className="col-span-2 flex flex-col">
+                        <span className="text-caption-13">{tip.date}</span>
+                        <span className="text-caption-12 text-grey-60">{tip.time}</span>
+                      </div>
+                    </div>
+                  ))
+                }
               </div>
             </div>
 
-            <div className="divide-y divide-grey-15 max-h-[28rem] overflow-auto no-scrollbar">
-              {
-              bettingTips.map((tip) => (
-                <div
-                  key={tip.id}
-                  className="grid grid-cols-12 p-3 hover:bg-grey-10 transition-colors"
-                >
-                  <div className="col-span-3 flex items-center">
-                    <span className="text-caption-13 font-medium truncate">
-                      {tip.league}
-                    </span>
-                  </div>
-                  <div className="col-span-4 flex items-center">
-                    <span className="text-caption-13 font-medium truncate">
-                      {tip.homeTeam} vs {tip.awayTeam}
-                    </span>
-                  </div>
-                  <div className="col-span-2 flex flex-col">
-                    <span className="text-caption-13 font-medium text-brand-50">
-                      {tip.tip}
-                    </span>
-                    {renderStars(tip.confidence)}
-                  </div>
-                  <div className="col-span-1 flex items-center">
-                    <span className="text-caption-13 font-bold text-accent-green">
-                      {tip.odds.toFixed(2)}
-                    </span>
-                  </div>
-                  <div className="col-span-2 flex flex-col">
-                    <span className="text-caption-13">{tip.date}</span>
-                    <span className="text-caption-12 text-grey-60">{tip.time}</span>
+            <div className="mt-3 bg-bg-l0 rounded-md border border-grey-15 p-3">
+              <div className="grid grid-cols-3 gap-4 text-center">
+                <div className="p-2 bg-grey-10 rounded-sm">
+                  <div className="text-caption-12 text-grey-70">Total Tips</div>
+                  <div className="text-caption-14 font-bold mt-1">24</div>
+                </div>
+                <div className="p-2 bg-grey-10 rounded-sm">
+                  <div className="text-caption-12 text-grey-70">Win Rate</div>
+                  <div className="text-caption-14 font-bold text-accent-green mt-1">
+                    78%
                   </div>
                 </div>
-              ))
-              }
-            </div>
-          </div>
-
-          <div className="mt-3 bg-bg-l0 rounded-md border border-grey-15 p-3">
-            <div className="grid grid-cols-3 gap-4 text-center">
-              <div className="p-2 bg-grey-10 rounded-sm">
-                <div className="text-caption-12 text-grey-70">Total Tips</div>
-                <div className="text-caption-14 font-bold mt-1">24</div>
-              </div>
-              <div className="p-2 bg-grey-10 rounded-sm">
-                <div className="text-caption-12 text-grey-70">Win Rate</div>
-                <div className="text-caption-14 font-bold text-accent-green mt-1">
-                  78%
+                <div className="p-2 bg-grey-10 rounded-sm">
+                  <div className="text-caption-12 text-grey-70">Avg Odds</div>
+                  <div className="text-caption-14 font-bold mt-1">1.85</div>
                 </div>
-              </div>
-              <div className="p-2 bg-grey-10 rounded-sm">
-                <div className="text-caption-12 text-grey-70">Avg Odds</div>
-                <div className="text-caption-14 font-bold mt-1">1.85</div>
               </div>
             </div>
           </div>
-        </div>
-      )
+        )
       }
 
       {activeTab === 'betslip' && <Betslip />}
