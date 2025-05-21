@@ -12,7 +12,8 @@ import AcceptedBets from 'compositions/AcceptedBets/AcceptedBets'
 
 import messages from './messages'
 
-const tabs = ['bettingTips', 'betslip', 'myBets'] as const
+
+const tabs = [ 'bettingTips', 'betslip', 'myBets' ] as const
 
 type BettingTip = {
   id: string,
@@ -28,7 +29,7 @@ type BettingTip = {
 }
 
 const TabbedBetslip: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<typeof tabs[number]>('bettingTips')
+  const [ activeTab, setActiveTab ] = useState<typeof tabs[number]>('bettingTips')
 
   // Sample betting tips data - replace with your actual data source
   const bettingTips: BettingTip[] = [
