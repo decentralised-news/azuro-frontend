@@ -1,4 +1,3 @@
-/* eslint-disable */
 'use client'
 
 import React, { useState } from 'react'
@@ -75,8 +74,7 @@ const TabbedBetslip: React.FC = () => {
   const renderStars = (count: number) => {
     return (
       <div className="flex items-center">
-        {
-        [
+        {[
           ...Array(5),
         ].map((_, i) => (
           <Icon
@@ -84,8 +82,7 @@ const TabbedBetslip: React.FC = () => {
             name="interface/win"
             className={`w-3 h-3 ${i < count ? 'text-yellow-400' : 'text-gray-300'}`}
           />
-        ))
-        }
+        ))}
       </div>
     )
   }
@@ -93,8 +90,7 @@ const TabbedBetslip: React.FC = () => {
   return (
     <>
       <div className="bg-bg-l0 rounded-md border border-grey-15 p-1 flex items-center">
-        {
-        tabs.map(tab => {
+        {tabs.map(tab => {
           const isActive = activeTab === tab
 
           return (
@@ -111,8 +107,7 @@ const TabbedBetslip: React.FC = () => {
               <Message value={messages[tab]} />
             </button>
           )
-        })
-        }
+        })}
       </div>
       
       {activeTab === 'bettingTips' && (
