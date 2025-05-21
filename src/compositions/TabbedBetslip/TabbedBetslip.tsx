@@ -10,7 +10,7 @@ import Betslip from 'compositions/Betslip/Betslip'
 import AcceptedBets from 'compositions/AcceptedBets/AcceptedBets'
 import messages from './messages'
 
-const tabs = ['bettingTips', 'betslip', 'myBets'] as const
+const tabs = [ 'bettingTips', 'betslip', 'myBets' ] as const
 
 type BettingTip = {
   id: string
@@ -23,7 +23,7 @@ type BettingTip = {
 }
 
 const TabbedBetslip: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<typeof tabs[number]>('bettingTips')
+  const [ activeTab, setActiveTab ] = useState<typeof tabs[number]>('bettingTips')
 
   const bettingTips: BettingTip[] = [
     {
@@ -59,7 +59,7 @@ const TabbedBetslip: React.FC = () => {
     return (
       <div className="flex">
         {
-          [...Array(5)].map((_, i) => (
+          [ ...Array(5) ].map((_, i) => (
             <Icon
               key={i}
               name="interface/win"
@@ -79,12 +79,14 @@ const TabbedBetslip: React.FC = () => {
           tabs.map((tab) => (
             <button
               key={tab}
-              className={cx(
+              className={
+                cx(
                 'flex-1 py-2 text-center text-xs transition-colors',
                 activeTab === tab
                   ? 'bg-brand-10 text-brand-50'
                   : 'text-grey-70 hover:bg-grey-10'
-              )}
+              )
+            }
               onClick={() => setActiveTab(tab)}
             >
               <Message value={messages[tab]} />
@@ -94,7 +96,8 @@ const TabbedBetslip: React.FC = () => {
       </div>
 
       {/* Betting Tips Content */}
-      {activeTab === 'bettingTips' && (
+      {
+      activeTab === 'bettingTips' && (
         <div className="flex-1 overflow-hidden flex flex-col">
           {/* Compact Header */}
           <div className="grid grid-cols-12 bg-grey-10 p-2 text-[10px] font-semibold text-grey-70 tracking-tight">
@@ -151,7 +154,8 @@ const TabbedBetslip: React.FC = () => {
             </div>
           </div>
         </div>
-      )}
+      )
+      }
 
       {/* Other Tabs */}
       {activeTab === 'betslip' && <Betslip />}
