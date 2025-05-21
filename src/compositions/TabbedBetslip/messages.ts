@@ -1,7 +1,7 @@
 export default {
   // New betting tips messages following your existing pattern
   bettingTips: {
-    en: 'Tips',
+    en: 'Top Tips',
   },
   league: {
     en: 'League',
