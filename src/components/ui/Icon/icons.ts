@@ -177,6 +177,8 @@ import _interface_vertical_view from '../../../../public/images/icons/interface/
 import _interface_vertical_viewSource from '!!raw-loader!../../../../public/images/icons/interface/vertical_view.svg'
 import _interface_warning from '../../../../public/images/icons/interface/warning.svg?url'
 import _interface_warningSource from '!!raw-loader!../../../../public/images/icons/interface/warning.svg'
+import _interface_star from '../../../../public/images/icons/interface/star.svg?url'
+import _interface_starSource from '!!raw-loader!../../../../public/images/icons/interface/star.svg'
 import _interface_win from '../../../../public/images/icons/interface/win.svg?url'
 import _interface_winSource from '!!raw-loader!../../../../public/images/icons/interface/win.svg'
 import _interface_withdraw from '../../../../public/images/icons/interface/withdraw.svg?url'
@@ -288,6 +290,7 @@ const icons = {
   'interface/user_avatar': { src: _interface_user_avatar.src, source: isServer && _interface_user_avatarSource, width: _interface_user_avatar.width, height: _interface_user_avatar.height, aspect: _interface_user_avatar.width/_interface_user_avatar.height }, 
   'interface/vertical_view': { src: _interface_vertical_view.src, source: isServer && _interface_vertical_viewSource, width: _interface_vertical_view.width, height: _interface_vertical_view.height, aspect: _interface_vertical_view.width/_interface_vertical_view.height }, 
   'interface/warning': { src: _interface_warning.src, source: isServer && _interface_warningSource, width: _interface_warning.width, height: _interface_warning.height, aspect: _interface_warning.width/_interface_warning.height }, 
+   'interface/star': { src: _interface_star.src, source: isServer && _interface_starSource, width: _interface_star.width, height: _interface_star.height, aspect: _interface_star.width/_interface_star.height }, 
   'interface/win': { src: _interface_win.src, source: isServer && _interface_winSource, width: _interface_win.width, height: _interface_win.height, aspect: _interface_win.width/_interface_win.height }, 
   'interface/withdraw': { src: _interface_withdraw.src, source: isServer && _interface_withdrawSource, width: _interface_withdraw.width, height: _interface_withdraw.height, aspect: _interface_withdraw.width/_interface_withdraw.height }, 
   'currency/azusd': { src: _currency_azusd.src, source: isServer && _currency_azusdSource, width: _currency_azusd.width, height: _currency_azusd.height, aspect: _currency_azusd.width/_currency_azusd.height }, 
