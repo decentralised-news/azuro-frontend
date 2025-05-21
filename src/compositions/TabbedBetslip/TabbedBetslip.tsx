@@ -135,7 +135,7 @@ const TabbedBetslip: React.FC = () => {
       time: '02:00',
       confidence: 3,
     },
-  ];
+  ]
 
   const renderStars = (count: number) => {
     return (
