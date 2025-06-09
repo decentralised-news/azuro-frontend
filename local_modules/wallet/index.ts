@@ -1,6 +1,5 @@
-export { default as WagmiProvider } from './WagmiProvider'
 export * from './utils'
-
+export { default as WagmiProvider } from './WagmiProvider'
 
 export { default as config, projectId } from './config'
 
