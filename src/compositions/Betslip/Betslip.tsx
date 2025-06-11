@@ -225,9 +225,9 @@ const Betslip: React.FC = () => {
           <Settings onClose={() => setSettingsVisible(false)} />
         ) : (
           <>
-           <Content openSettings={() => setSettingsVisible(true)} />
-           <BettingTips />
-         </>
+            <Content openSettings={() => setSettingsVisible(true)} />
+            <BettingTips />
+          </>
         )
       }
     </>
