@@ -201,8 +201,6 @@ const Content: React.FC<ContentProps> = ({ openSettings }) => {
           </div>
         </div>
       </div>
-
-      <BettingTips />
     </div>
   )
 }
@@ -213,7 +211,10 @@ const Betslip: React.FC = () => {
 
   if (!items.length) {
     return (
-      <EmptyContent />
+      <>
+        <EmptyContent />
+        <BettingTips />
+      </>
     )
   }
 
@@ -223,7 +224,10 @@ const Betslip: React.FC = () => {
         isSettingsVisible ? (
           <Settings onClose={() => setSettingsVisible(false)} />
         ) : (
-          <Content openSettings={() => setSettingsVisible(true)} />
+          <>
+           <Content openSettings={() => setSettingsVisible(true)} />
+           <BettingTips />
+         </>
         )
       }
     </>
