@@ -149,7 +149,7 @@ const BettingTips: React.FC<BettingTipsProps> = ({ tips = bettingTipsData }) => 
   }
 
   return (
-    <div className="flex-1 overflow-hidden flex flex-col">
+    <div className="flex-1 overflow-hidden flex flex-col mt-6">
       {/* Compact Header */}
       <div className="grid grid-cols-12 bg-grey-10 p-2 text-[10px] font-semibold text-grey-70 tracking-tight">
         <div className="col-span-4 px-1">Match</div>
