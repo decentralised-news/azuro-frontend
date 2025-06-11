@@ -13,6 +13,8 @@ import { AmountInput, BetButton, Card, Chips, SelectFreebet, Slippage, QuickBet 
 
 import messages from './messages'
 
+import BettingTips from 'compositions/TabbedBetslip/BettingTips'
+
 
 const EmptyContent: React.FC = () => {
   return (
@@ -200,6 +202,8 @@ const Content: React.FC<ContentProps> = ({ openSettings }) => {
           </div>
         </div>
       </div>
+
+      <BettingTips/>
     </div>
   )
 }
