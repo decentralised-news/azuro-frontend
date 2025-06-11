@@ -136,13 +136,13 @@ const BettingTips: React.FC<BettingTipsProps> = ({ tips = bettingTipsData }) => 
     return (
       <div className="flex">
         {
-        [ ...Array(5) ].map((_, i) => (
-          <Icon
-            key={i}
-            name="interface/win"
-            className={`w-2.5 h-2.5 ${i < count ? 'text-yellow-400' : 'text-gray-300'}`}
-          />
-        ))
+          [ ...Array(5) ].map((_, i) => (
+            <Icon
+              key={i}
+              name="interface/win"
+              className={`w-2.5 h-2.5 ${i < count ? 'text-yellow-400' : 'text-gray-300'}`}
+            />
+          ))
         }
       </div>
     )
