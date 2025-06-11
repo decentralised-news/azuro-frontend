@@ -202,7 +202,7 @@ const Content: React.FC<ContentProps> = ({ openSettings }) => {
         </div>
       </div>
 
-      <BettingTips/>
+      <BettingTips />
     </div>
   )
 }
