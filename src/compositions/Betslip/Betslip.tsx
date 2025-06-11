@@ -8,12 +8,11 @@ import cx from 'classnames'
 import { Icon } from 'components/ui'
 import { Warning } from 'components/feedback'
 import ConnectButtonWrapper from 'compositions/ConnectButtonWrapper/ConnectButtonWrapper'
+import BettingTips from 'compositions/TabbedBetslip/BettingTips'
 
 import { AmountInput, BetButton, Card, Chips, SelectFreebet, Slippage, QuickBet } from './components'
 
 import messages from './messages'
-
-import BettingTips from 'compositions/TabbedBetslip/BettingTips'
 
 
 const EmptyContent: React.FC = () => {

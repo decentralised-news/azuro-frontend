@@ -1,7 +1,10 @@
 'use client'
 
 import React from 'react'
+
+
 import { Icon } from 'components/ui'
+
 
 export type BettingTip = {
   id: string
@@ -132,13 +135,14 @@ const BettingTips: React.FC<BettingTipsProps> = ({ tips = bettingTipsData }) => 
   const renderStars = (count: number) => {
     return (
       <div className="flex">
-        {[...Array(5)].map((_, i) => (
+        {[ ...Array(5) ].map((_, i) => (
           <Icon
             key={i}
             name="interface/win"
             className={`w-2.5 h-2.5 ${i < count ? 'text-yellow-400' : 'text-gray-300'}`}
           />
-        ))}
+        ))
+        }
       </div>
     )
   }
@@ -155,7 +159,8 @@ const BettingTips: React.FC<BettingTipsProps> = ({ tips = bettingTipsData }) => 
 
       {/* Scrollable Tips List */}
       <div className="flex-1 overflow-y-auto no-scrollbar divide-y divide-grey-15">
-        {tips.map((tip) => (
+        {
+        tips.map((tip) => (
           <div
             key={tip.id}
             className="grid grid-cols-12 p-2 hover:bg-grey-10 transition-colors"
@@ -177,7 +182,8 @@ const BettingTips: React.FC<BettingTipsProps> = ({ tips = bettingTipsData }) => 
               <span className="text-[10px] text-grey-60">{tip.time}</span>
             </div>
           </div>
-        ))}
+        ))
+        }
       </div>
 
       {/* Mini Stats Footer */}
