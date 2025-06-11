@@ -135,7 +135,8 @@ const BettingTips: React.FC<BettingTipsProps> = ({ tips = bettingTipsData }) => 
   const renderStars = (count: number) => {
     return (
       <div className="flex">
-        {[ ...Array(5) ].map((_, i) => (
+        {
+        [ ...Array(5) ].map((_, i) => (
           <Icon
             key={i}
             name="interface/win"
@@ -160,28 +161,28 @@ const BettingTips: React.FC<BettingTipsProps> = ({ tips = bettingTipsData }) => 
       {/* Scrollable Tips List */}
       <div className="flex-1 overflow-y-auto no-scrollbar divide-y divide-grey-15">
         {
-        tips.map((tip) => (
-          <div
-            key={tip.id}
-            className="grid grid-cols-12 p-2 hover:bg-grey-10 transition-colors"
-          >
-            <div className="col-span-4 flex flex-col px-1">
-              <span className="text-[11px] font-medium truncate">{tip.league}</span>
-              <span className="text-[10px] text-grey-60 truncate">{tip.match}</span>
+          tips.map((tip) => (
+            <div
+              key={tip.id}
+              className="grid grid-cols-12 p-2 hover:bg-grey-10 transition-colors"
+            >
+              <div className="col-span-4 flex flex-col px-1">
+                <span className="text-[11px] font-medium truncate">{tip.league}</span>
+                <span className="text-[10px] text-grey-60 truncate">{tip.match}</span>
+              </div>
+              <div className="col-span-3 flex flex-col px-1">
+                <span className="text-[11px] font-medium text-brand-50">{tip.tip}</span>
+                {renderStars(tip.confidence)}
+              </div>
+              <div className="col-span-3 flex items-center justify-end px-1">
+                <span className="text-[11px] font-bold text-accent-green">
+                  {tip.odds.toFixed(2)}
+                </span>
+              </div>
+              <div className="col-span-2 flex items-center justify-end px-1">
+                <span className="text-[10px] text-grey-60">{tip.time}</span>
+              </div>
             </div>
-            <div className="col-span-3 flex flex-col px-1">
-              <span className="text-[11px] font-medium text-brand-50">{tip.tip}</span>
-              {renderStars(tip.confidence)}
-            </div>
-            <div className="col-span-3 flex items-center justify-end px-1">
-              <span className="text-[11px] font-bold text-accent-green">
-                {tip.odds.toFixed(2)}
-              </span>
-            </div>
-            <div className="col-span-2 flex items-center justify-end px-1">
-              <span className="text-[10px] text-grey-60">{tip.time}</span>
-            </div>
-          </div>
           ))
         }
       </div>
