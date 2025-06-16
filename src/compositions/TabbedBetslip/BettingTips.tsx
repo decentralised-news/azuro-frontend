@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from 'react'
 import { Icon } from 'components/ui'
 
+
 interface BettingTip {
   id: number
   league: string
@@ -33,11 +34,13 @@ const BettingTips = () => {
     const fetchTips = async () => {
       try {
         const response = await fetch(
-          'https://decntralisedapi.onrender.com/api/betting-tips?page=1&pageSize=50'
+          'https://decntralisedapi.onrender.com/api/betting-tips?page=1&pageSize=100000'
         )
+        
         if (!response.ok) {
           throw new Error('Failed to fetch betting tips')
         }
+
         const data: ApiResponse = await response.json()
         setTips(data.data)
       } catch (err) {
@@ -53,11 +56,11 @@ const BettingTips = () => {
   const renderStars = (count: number) => {
     return (
       <div className="flex space-x-0.5">
-        {[...Array(5)].map((_, i) => (
+        {[ ...Array(5) ].map((_, i) => (
           <Icon
             key={i}
             name="interface/win"
-            className={`w-3 h-3 ${i < count ? 'text-brand-60' : 'text-gray-300'}`}
+            className={`w-3 h-3 ${i < count ? 'text-brand-50' : 'text-grey-30'}`}
           />
         ))}
       </div>
@@ -72,82 +75,78 @@ const BettingTips = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-brand-60"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-brand-50"></div>
       </div>
     )
   }
 
   if (error) {
     return (
-      <div className="bg-brand-20 text-brand-70 p-4 rounded-lg">
+      <div className="bg-grey-10 text-grey-70 p-4 rounded-lg">
         <p>Error loading tips: {error}</p>
       </div>
     )
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-brand-70 to-brand-60 p-4">
-        <div className="flex justify-between items-center">
-          <h2 className="text-white font-bold text-lg">Today's Betting Tips</h2>
-          <span className="bg-white/20 text-white/90 text-xs px-2 py-1 rounded-full">
-            {tips.length} tips
-          </span>
-        </div>
+    <div className="flex-1 overflow-hidden flex flex-col bg-bg-l0 rounded-lg border border-grey-15">
+      {/* Compact Header */}
+      <div className="grid grid-cols-12 bg-grey-10 p-2 text-[10px] font-semibold text-grey-70 tracking-tight">
+        <div className="col-span-4 px-1">Match</div>
+        <div className="col-span-3 px-1">Tip</div>
+        <div className="col-span-3 px-1 text-right">Odds</div>
+        <div className="col-span-2 px-1 text-right">Time</div>
       </div>
 
-      {/* Tips List */}
-      <div className="divide-y divide-gray-200 max-h-[500px] overflow-y-auto">
-        {
-        tips.map((tip) => (
-            <div
-              key={tip.id}
-              className="p-4 hover:bg-brand-20/30 transition-colors duration-150"
-            >
-              <div className="flex justify-between items-start mb-2">
-                <div>
-                  <span className="text-xs font-medium text-gray-500">
-                    {tip.league} • {formatDate(tip.date)}
-                  </span>
-                  <h3 className="font-medium text-gray-900">{tip.match}</h3>
-                </div>
-              </div>
-
-              <div className="flex justify-between items-center mt-3">
-                <div>
-                  <p className="text-sm font-semibold text-brand-60">{tip.tip}</p>
-                  <div className="mt-1 flex items-center">
-                    {renderStars(tip.confidence)}
-                    <span className="text-xs text-gray-500 ml-2">
-                      Confidence: {tip.confidence}/5
-                    </span>
-                  </div>
-                </div>
-
-                <div className="text-right">
-                  <p className="text-sm font-semibold text-gray-900">
-                    {tip.time}
-                  </p>
-                  <p className="text-lg font-bold text-brand-60">
-                    {parseFloat(tip.odds).toFixed(2)}
-                  </p>
-                </div>
-              </div>
+      {/* Scrollable Tips List */}
+      <div className="flex-1 overflow-y-auto no-scrollbar divide-y divide-grey-15">
+        {tips.map((tip) => (
+          <div
+            key={tip.id}
+            className="grid grid-cols-12 p-2 hover:bg-grey-10 transition-colors"
+          >
+            <div className="col-span-4 flex flex-col px-1">
+              <span className="text-[11px] font-medium text-grey-80 truncate">
+                {tip.league}
+              </span>
+              <span className="text-[10px] text-grey-60 truncate">
+                {tip.match}
+              </span>
             </div>
-          ))
-        }
+            <div className="col-span-3 flex flex-col px-1">
+              <span className="text-[11px] font-medium text-brand-50">
+                {tip.tip}
+              </span>
+              {renderStars(tip.confidence)}
+            </div>
+            <div className="col-span-3 flex items-center justify-end px-1">
+              <span className="text-[11px] font-bold text-accent-green">
+                {parseFloat(tip.odds).toFixed(2)}
+              </span>
+            </div>
+            <div className="col-span-2 flex items-center justify-end px-1">
+              <span className="text-[10px] text-grey-60">
+                {tip.time}
+              </span>
+            </div>
+          </div>
+        ))}
       </div>
 
-      {/* Summary Footer */}
-      <div className="bg-brand-20 p-3 border-t border-gray-200">
-        <div className="flex justify-between text-sm">
-          <div className="text-brand-70">
-            <span className="font-medium">Last updated:</span>{' '}
-            {new Date().toLocaleTimeString()}
+      {/* Mini Stats Footer */}
+      <div className="bg-grey-10 border-t border-grey-15 p-2">
+        <div className="grid grid-cols-3 gap-1 text-center text-[10px]">
+          <div className="bg-bg-l0 rounded p-1">
+            <div className="text-grey-70">Win Rate</div>
+            <div className="font-bold text-accent-green">78%</div>
           </div>
-          <div className="text-brand-60 font-medium hover:text-brand-70 transition-colors cursor-pointer">
-            View all tips →
+          <div className="bg-bg-l0 rounded p-1">
+            <div className="text-grey-70">Avg Odds</div>
+            <div className="font-bold">1.85</div>
+          </div>
+          <div className="bg-bg-l0 rounded p-1">
+            <div className="text-grey-70">Tips</div>
+            <div className="font-bold">{tips.length}</div>
           </div>
         </div>
       </div>
