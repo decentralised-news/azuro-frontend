@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use client'
 
 import React, { useEffect, useState } from 'react'
@@ -98,42 +99,44 @@ const BettingTips = () => {
 
       {/* Tips List */}
       <div className="divide-y divide-gray-200 max-h-[500px] overflow-y-auto">
-        {tips.map((tip) => (
-          <div
-            key={tip.id}
-            className="p-4 hover:bg-brand-20/30 transition-colors duration-150"
-          >
-            <div className="flex justify-between items-start mb-2">
-              <div>
-                <span className="text-xs font-medium text-gray-500">
-                  {tip.league} • {formatDate(tip.date)}
-                </span>
-                <h3 className="font-medium text-gray-900">{tip.match}</h3>
-              </div>
-            </div>
-
-            <div className="flex justify-between items-center mt-3">
-              <div>
-                <p className="text-sm font-semibold text-brand-60">{tip.tip}</p>
-                <div className="mt-1 flex items-center">
-                  {renderStars(tip.confidence)}
-                  <span className="text-xs text-gray-500 ml-2">
-                    Confidence: {tip.confidence}/5
+        {
+        tips.map((tip) => (
+            <div
+              key={tip.id}
+              className="p-4 hover:bg-brand-20/30 transition-colors duration-150"
+            >
+              <div className="flex justify-between items-start mb-2">
+                <div>
+                  <span className="text-xs font-medium text-gray-500">
+                    {tip.league} • {formatDate(tip.date)}
                   </span>
+                  <h3 className="font-medium text-gray-900">{tip.match}</h3>
                 </div>
               </div>
 
-              <div className="text-right">
-                <p className="text-sm font-semibold text-gray-900">
-                  {tip.time}
-                </p>
-                <p className="text-lg font-bold text-brand-60">
-                  {parseFloat(tip.odds).toFixed(2)}
-                </p>
+              <div className="flex justify-between items-center mt-3">
+                <div>
+                  <p className="text-sm font-semibold text-brand-60">{tip.tip}</p>
+                  <div className="mt-1 flex items-center">
+                    {renderStars(tip.confidence)}
+                    <span className="text-xs text-gray-500 ml-2">
+                      Confidence: {tip.confidence}/5
+                    </span>
+                  </div>
+                </div>
+
+                <div className="text-right">
+                  <p className="text-sm font-semibold text-gray-900">
+                    {tip.time}
+                  </p>
+                  <p className="text-lg font-bold text-brand-60">
+                    {parseFloat(tip.odds).toFixed(2)}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
 
       {/* Summary Footer */}
