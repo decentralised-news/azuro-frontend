@@ -94,8 +94,7 @@ const BettingTips = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-brand-50"
-        />
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-brand-50"></div>
       </div>
     )
   }
@@ -140,9 +139,9 @@ const BettingTips = () => {
                 <span
                   className={
                     `text-xs font-medium px-2 py-1 rounded-full ${getStatusColor(
-                    tip.status
-                  )}`
-                }
+                      tip.status
+                    )}`
+                  }
                 >
                   {tip.status}
                 </span>
