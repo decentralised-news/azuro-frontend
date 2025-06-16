@@ -22,19 +22,19 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // 'brand-70': '#B84200',
-        // 'brand-60': '#E66001',
-        // 'brand-50': '#FF6B00',
-        // 'brand-15': '#3A2B20',
-        // 'brand-10': '#642900',
-        // 'brand-5': '#331500',
+        'brand-70': '#B84200',
+        'brand-60': '#E66001',
+        'brand-50': '#FF6B00',
+        'brand-15': '#3A2B20',
+        'brand-10': '#642900',
+        'brand-5': '#331500',
 
-        'brand-70': '#A82A2A',   // Deep, dark red (like your B84200 but red)  
-        'brand-60': '#D33536',   // Your main color (vibrant, bold red)  
-        'brand-50': '#F04E4F',   // Slightly brighter red (like your FF6B00)  
-        'brand-40': '#FF6B6B',   // Lighter red (for accents/hover states)  
-        'brand-30': '#FF9E9E',   // Soft red (for subtle UI elements)  
-        'brand-20': '#FFD4D4',   // Very light red (backgrounds)  
+        // 'brand-70': '#A82A2A',   // Deep, dark red (like your B84200 but red)  
+        // 'brand-60': '#D33536',   // Your main color (vibrant, bold red)  
+        // 'brand-50': '#F04E4F',   // Slightly brighter red (like your FF6B00)  
+        // 'brand-40': '#FF6B6B',   // Lighter red (for accents/hover states)  
+        // 'brand-30': '#FF9E9E',   // Soft red (for subtle UI elements)  
+        // 'brand-20': '#FFD4D4',   // Very light red (backgrounds)  
 
         'grey-90': '#EBEBEB',
         'grey-70': '#ADADAD',
