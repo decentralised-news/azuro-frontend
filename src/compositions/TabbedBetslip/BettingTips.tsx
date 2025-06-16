@@ -1,6 +1,8 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+
+
 import { Icon } from 'components/ui'
 
 interface BettingTip {
@@ -25,7 +27,7 @@ interface ApiResponse {
 }
 
 const BettingTips = () => {
-  const [  tips, setTips] = useState<BettingTip[]>([])
+  const [ tips, setTips ] = useState<BettingTip[]>([])
   const [ loading, setLoading ] = useState(true)
   const [ error, setError ] = useState<string | null>(null)
 
@@ -35,14 +37,17 @@ const BettingTips = () => {
         const response = await fetch(
           'https://decntralisedapi.onrender.com/api/betting-tips?page=1&pageSize=100000'
         )
+        
         if (!response.ok) {
           throw new Error('Failed to fetch betting tips')
         }
         const data: ApiResponse = await response.json()
         setTips(data.data)
-      } catch (err) {
+      } 
+      catch (err) {
         setError(err instanceof Error ? err.message : 'An unknown error occurred')
-      } finally {
+      } 
+      finally {
         setLoading(false)
       }
     }
@@ -54,13 +59,13 @@ const BettingTips = () => {
     return (
       <div className="flex space-x-0.5">
         {
-        [ ...Array(5) ].map((_, i) => (
-          <Icon
-            key={i}
-            name="interface/win"
-            className={`w-3 h-3 ${i < count ? 'text-yellow-400' : 'text-gray-300'}`}
-          />
-        ))
+          [ ...Array(5) ].map((_, i) => (
+            <Icon
+              key={i}
+              name="interface/win"
+              className={`w-3 h-3 ${i < count ? 'text-yellow-400' : 'text-gray-300'}`}
+            />
+          ))
         }
       </div>
     )
@@ -81,13 +86,14 @@ const BettingTips = () => {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
+    
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
   }
 
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-brand-50"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-brand-50"/>
       </div>
     )
   }
@@ -108,7 +114,7 @@ const BettingTips = () => {
           <h2 className="text-white font-bold text-lg">Today's Betting Tips</h2>
           <span className="bg-white/20 text-white/90 text-xs px-2 py-1 rounded-full">
             {
-            tips.length
+              tips.length
             } tips
           </span>
         </div>
@@ -116,7 +122,8 @@ const BettingTips = () => {
 
       {/* Tips List */}
       <div className="divide-y divide-gray-200 max-h-[500px] overflow-y-auto">
-        {tips.map((tip) => (
+        {
+        tips.map((tip) => (
           <div
             key={tip.id}
             className="p-4 hover:bg-gray-100 transition-colors duration-150"
@@ -129,9 +136,11 @@ const BettingTips = () => {
                 <h3 className="font-medium text-gray-900">{tip.match}</h3>
               </div>
               <span
-                className={`text-xs font-medium px-2 py-1 rounded-full ${getStatusColor(
+                className={
+                  `text-xs font-medium px-2 py-1 rounded-full ${getStatusColor(
                   tip.status
-                )}`}
+                )}`
+              }
               >
                 {tip.status}
               </span>
@@ -158,7 +167,8 @@ const BettingTips = () => {
               </div>
             </div>
           </div>
-        ))}
+        ))
+        }
       </div>
 
       {/* Summary Footer */}
