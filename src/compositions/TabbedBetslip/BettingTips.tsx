@@ -33,7 +33,7 @@ const BettingTips = () => {
     const fetchTips = async () => {
       try {
         const response = await fetch(
-          'https://decntralisedapi.onrender.com/api/betting-tips?page=1&pageSize=100000'
+          'https://decntralisedapi.onrender.com/api/betting-tips?page=1&pageSize=50'
         )
         if (!response.ok) {
           throw new Error('Failed to fetch betting tips')
