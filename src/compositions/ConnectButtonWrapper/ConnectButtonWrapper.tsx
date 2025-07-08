@@ -30,7 +30,7 @@ const ConnectButtonWrapper: React.FC<ConnectButtonWrapperProps> = ({ children })
             onClick={connectOrCreateWallet}
          />
       // <Button
-      //   {...props}
+      //    {...props}
       //   title={buttonMessages.connectWallet}
       //   size={props?.size || 40}
       //   loading={!ready}
