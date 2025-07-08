@@ -27,7 +27,7 @@ const Content: React.FC = () => {
 const Header: React.FC = () => {
   const { account, isReconnecting, isConnecting } = useWallet()
   const pathname = usePathname()
-  const { login } = usePrivy()
+  const { login, connectOrCreateWallet } = usePrivy()
   const [ isVisible, setVisibility ] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -80,8 +80,15 @@ const Header: React.FC = () => {
                 title={buttonMessages.connectWallet}
                 size={32}
                 loading={isConnecting || isReconnecting}
-                onClick={login}
+                onClick={connectOrCreateWallet}
               />
+              // <Button
+              //   className="ml-auto"
+              //   title={buttonMessages.connectWallet}
+              //   size={32}
+              //   loading={isConnecting || isReconnecting}
+              //   onClick={login}
+              // />
             )
         }
       </div>

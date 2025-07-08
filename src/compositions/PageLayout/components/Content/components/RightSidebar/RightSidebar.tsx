@@ -13,7 +13,7 @@ import Controls from '../Controls/Controls'
 
 const RightSidebar: React.FC = () => {
   const { account, isReconnecting, isConnecting } = useWallet()
-  const { login } = usePrivy()
+  const { login, connectOrCreateWallet } = usePrivy()
 
   return (
     <>
@@ -27,8 +27,15 @@ const RightSidebar: React.FC = () => {
               title={buttonMessages.connectWallet}
               size={40}
               loading={isConnecting || isReconnecting}
-              onClick={login}
+              onClick={connectOrCreateWallet}
             />
+            // <Button
+            //   className="ml-auto"
+            //   title={buttonMessages.connectWallet}
+            //   size={40}
+            //   loading={isConnecting || isReconnecting}
+            //   onClick={login}
+            // />
           )
         }
       </div>
