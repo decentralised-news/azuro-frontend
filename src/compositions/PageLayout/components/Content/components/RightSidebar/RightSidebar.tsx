@@ -22,20 +22,20 @@ const RightSidebar: React.FC = () => {
           Boolean(account) ? (
             <Controls className="ml-auto" />
           ) : (
-            <Button
-              className="ml-auto"
-              title={buttonMessages.connectWallet}
-              size={40}
-              loading={isConnecting || isReconnecting}
-              onClick={connectOrCreateWallet}
-            />
             // <Button
             //   className="ml-auto"
             //   title={buttonMessages.connectWallet}
             //   size={40}
             //   loading={isConnecting || isReconnecting}
-            //   onClick={login}
+            //   onClick={connectOrCreateWallet}
             // />
+            <Button
+              className="ml-auto"
+              title={buttonMessages.connectWallet}
+              size={40}
+              loading={isConnecting || isReconnecting}
+              onClick={login}
+            />
           )
         }
       </div>
