@@ -17,6 +17,7 @@
     "skipLibCheck": true,
     "strict": true,
 
+    
     "strictPropertyInitialization": false,
     "noImplicitAny": false,
     "useUnknownInCatchVariables": false,
