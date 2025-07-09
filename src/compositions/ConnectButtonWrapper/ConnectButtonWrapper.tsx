@@ -28,9 +28,9 @@ const ConnectButtonWrapper: React.FC<ConnectButtonWrapperProps> = ({ children })
       //   loading={!ready}
       //   className={props?.className || 'w-full'}
       //   onClick={connectOrCreateWallet}
-      ///>
+      // />
       <Button
-         {...props}
+        {...props}
         title={buttonMessages.connectWallet}
         size={props?.size || 40}
         loading={!ready}
