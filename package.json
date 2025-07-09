@@ -41,6 +41,7 @@
     "dayjs": "^1.11.13",
     "formular": "3.1.6",
     "graphql": "^16.9.0",
+    "graphql-tag": "^2.12.6",
     "next": "15.3.2",
     "postcss": "^8.4.40",
     "react": "^19.1.0",
