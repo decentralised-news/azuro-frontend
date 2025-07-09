@@ -28,6 +28,7 @@
     "@locmod/intl": "1.0.5",
     "@locmod/local-storage": "1.0.4",
     "@locmod/modal": "3.0.1",
+    "@privy-io/js-sdk-core": "^0.52.4",
     "axios": "^1.7.9",
     "classnames": "^2.5.1",
     "cookies-next": "^4.2.1",
