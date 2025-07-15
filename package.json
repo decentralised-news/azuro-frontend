@@ -2,8 +2,8 @@
   "name": "sdk-example",
   "version": "3.0.0",
   "engines": {
-    "node": "=22.11.0"
-  },
+  "node": "20.12.2"
+},
   "private": true,
   "scripts": {
     "dev": "npm run watch-icons & next dev",
