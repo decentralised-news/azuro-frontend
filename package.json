@@ -2,7 +2,7 @@
   "name": "sdk-example",
   "version": "3.0.0",
   "engines": {
-    "node": "20.x"
+    "node": "=22.11.0"
   },
   "private": true,
   "scripts": {
@@ -19,7 +19,6 @@
     "@azuro-org/sdk": "6.1.6",
     "@azuro-org/sdk-social-aa-connector": "^1.1.7",
     "@azuro-org/toolkit": "5.1.2",
-    "@babel/core": "^7.28.0",
     "@floating-ui/react-dom-interactions": "^0.13.3",
     "@glidejs/glide": "^3.6.2",
     "@headlessui/react": "2.2.0",
