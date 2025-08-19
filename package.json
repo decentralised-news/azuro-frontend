@@ -20,6 +20,7 @@
     "@azuro-org/sdk-social-aa-connector": "^1.1.7",
     "@azuro-org/toolkit": "5.1.2",
     "@babel/core": "^7.28.3",
+    "@bigmi/react": "^0.4.4",
     "@floating-ui/react-dom-interactions": "^0.13.3",
     "@glidejs/glide": "^3.6.2",
     "@headlessui/react": "2.2.0",
