@@ -21,9 +21,7 @@ const Form: React.CFC<FormProps> = (props) => {
     }
 
     if (typeof onSubmit === 'function') {
-      // `onSubmit` may expect a native SubmitEvent (with `submitter`) while React provides a FormEvent.
-      // Cast to `any` here so consumers can opt into native SubmitEvent typings if desired.
-      onSubmit(event as any)
+      onSubmit(event)
     }
   }, [ loading, disabled, onSubmit ])
 
