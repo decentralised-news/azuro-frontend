@@ -75,20 +75,20 @@ const Header: React.FC = () => {
           Boolean(account)
             ? <Controls />
             : (
-              <Button
-                className="ml-auto"
-                title={buttonMessages.connectWallet}
-                size={32}
-                loading={isConnecting || isReconnecting}
-                onClick={connectOrCreateWallet}
-              />
               // <Button
               //   className="ml-auto"
               //   title={buttonMessages.connectWallet}
               //   size={32}
               //   loading={isConnecting || isReconnecting}
-              //   onClick={login}
+              //   onClick={connectOrCreateWallet}
               // />
+              <Button
+                className="ml-auto"
+                title={buttonMessages.connectWallet}
+                size={32}
+                loading={isConnecting || isReconnecting}
+                onClick={login}
+              />
             )
         }
       </div>

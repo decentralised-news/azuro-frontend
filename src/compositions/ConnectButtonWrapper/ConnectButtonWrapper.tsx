@@ -21,22 +21,22 @@ const ConnectButtonWrapper: React.FC<ConnectButtonWrapperProps> = ({ children })
 
   if (!account) {
     return (
-      <Button
-        {...props}
-        title={buttonMessages.connectWallet}
-        size={props?.size || 40}
-        loading={!ready}
-        className={props?.className || 'w-full'}
-        onClick={connectOrCreateWallet}
-      />
       // <Button
       //   {...props}
       //   title={buttonMessages.connectWallet}
       //   size={props?.size || 40}
       //   loading={!ready}
       //   className={props?.className || 'w-full'}
-      //   onClick={login}
+      //   onClick={connectOrCreateWallet}
       // />
+      <Button
+        {...props}
+        title={buttonMessages.connectWallet}
+        size={props?.size || 40}
+        loading={!ready}
+        className={props?.className || 'w-full'}
+        onClick={login}
+      />
     )
   }
 
