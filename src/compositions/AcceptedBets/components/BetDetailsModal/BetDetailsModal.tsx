@@ -28,7 +28,7 @@ type OutcomeProps = {
 }
 
 const Outcome: React.FC<OutcomeProps> = ({ outcome, isCombo, onLinkClick }) => {
-  const { game, marketName, selectionName, odds, isWin, isLose } = outcome
+  const { game, marketName, selectionName, odds, isWin, isLose, isCanceled } = outcome
   const {
     title,
     state: gameState, gameId, participants, startsAt,
@@ -86,9 +86,10 @@ const Outcome: React.FC<OutcomeProps> = ({ outcome, isCombo, onLinkClick }) => {
                                 cx('font-semibold', {
                                   'text-accent-green': isWin,
                                   'text-accent-red': isLose,
+                                  'text-grey-60': isCanceled,
                                 })
                               }
-                              value={isWin ? messages.gameState.win : messages.gameState.lose}
+                              value={isCanceled ? messages.gameState.refunded : (isWin ? messages.gameState.win : messages.gameState.lose)}
                             />
                           )
                         }

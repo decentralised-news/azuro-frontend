@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { XMasonry, XBlock } from 'react-xmasonry'
 import { GameState, getIsPendingResolution } from '@azuro-org/toolkit'
 import { type GameData, type GameMarkets, type Market } from '@azuro-org/toolkit'
-import { useActiveMarkets, useBetsSummaryBySelection, useConditionState, useResolvedMarkets } from '@azuro-org/sdk'
+import { useActiveMarkets, useBetsSummaryBySelection, useConditionState } from '@azuro-org/sdk'
 import { useAccount } from '@azuro-org/sdk-social-aa-connector'
 import dayjs from 'dayjs'
 import cx from 'classnames'
@@ -60,7 +60,7 @@ const Condition: React.FC<ConditionProps> = (props) => {
   const { condition, marketName, game, betsSummary, isResult } = props
   const { conditionId, outcomes, state: initialState } = condition
 
-  const { data: state, isLocked } = useConditionState({
+  const { isLocked } = useConditionState({
     conditionId,
     initialState,
   })
@@ -70,14 +70,13 @@ const Condition: React.FC<ConditionProps> = (props) => {
       <div className="flex gap-2 w-full">
         {
           outcomes.map((outcome) => {
-            const key = outcome.outcomeId
+            const key = `${conditionId}-${outcome.outcomeId}`
 
             if (isResult) {
               return (
                 <OutcomeResult
                   key={key}
                   outcome={outcome}
-                  conditionState={state}
                   summary={betsSummary?.[key]}
                   size={40}
                 />
@@ -201,7 +200,7 @@ type MarketsProps = {
 
 const ResolvedMarkets: React.FC<MarketsProps> = ({ game, gameState }) => {
   const { address } = useAccount()
-  const { data: markets, isLoading } = useResolvedMarkets({ gameId: game.gameId })
+  const { data: markets, isLoading } = useActiveMarkets({ gameId: game.gameId, includeHidden: true })
   const { data: betsSummary } = useBetsSummaryBySelection({
     account: address!,
     gameId: game.gameId,

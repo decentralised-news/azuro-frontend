@@ -33,7 +33,7 @@ type OutcomeProps = {
 }
 
 const Outcome: React.FC<OutcomeProps> = ({ outcome, isCombo }) => {
-  const { odds, marketName, game, selectionName, isWin, isLose, isLive } = outcome
+  const { odds, marketName, game, selectionName, isWin, isLose, isCanceled, isLive } = outcome
 
   const {
     title,
@@ -55,7 +55,7 @@ const Outcome: React.FC<OutcomeProps> = ({ outcome, isCombo }) => {
   const countrySlug = country?.slug
 
   const isUnique = sportSlug === 'unique'
-  const withResult = isWin !== null || isLose !== null
+  const withResult = isWin !== null || isLose !== null || isCanceled
   const { date, time } = getGameDateTime(+(startsAt || 0) * 1000)
 
   const marketBoxClassName = 'text-caption-13 mb:flex mb:items-center mb:justify-between'
@@ -150,9 +150,10 @@ const Outcome: React.FC<OutcomeProps> = ({ outcome, isCombo }) => {
                                   cx('font-semibold', {
                                     'text-accent-green': isWin,
                                     'text-accent-red': isLose,
+                                    'text-grey-60': isCanceled,
                                   })
                                 }
-                                value={isWin ? messages.gameState.win : messages.gameState.lose}
+                                value={isCanceled ? messages.gameState.refunded : (isWin ? messages.gameState.win : messages.gameState.lose)}
                               />
                             </>
                           )

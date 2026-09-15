@@ -57,6 +57,9 @@ export default {
     lose: {
       en: 'Lost',
     },
+    refunded: {
+      en: 'Refunded',
+    },
     live: {
       en: 'Live\’',
     },

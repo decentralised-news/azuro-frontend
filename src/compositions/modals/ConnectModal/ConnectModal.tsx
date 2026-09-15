@@ -65,7 +65,6 @@ const ConnectModal: ModalComponent<ConnectModalProps> = (props) => {
 
   let content: ReactNode
 
-  // @ts-expect-error
   const walletIcon = variables?.connector?.icon
   const walletName = variables?.connector?.name
 

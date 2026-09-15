@@ -44,7 +44,7 @@ const currencyIcons: Record<ChainId, IconName> = {
   [bscTestnet.id]: 'currency/usdt',
 }
 
-const sportsOrder = [ 'politics', 'football', 'basketball', 'tennis', 'cricket', 'mma', 'boxing', 'ice-hockey', 'american-football', 'baseball', 'rugby-union', 'rugby-league' ]
+const sportsOrder = [ 'politics', 'football', 'basketball', 'tennis', 'cricket', 'mma', 'boxing', 'ice-hockey', 'american-football', 'baseball', 'rugby-union', 'rugby-league', 'handball', 'snooker', 'formula-1' ]
 
 
 const links = {
@@ -64,8 +64,6 @@ const resultAmountDecimalsByChain = {
   [polygonAmoy.id]: 2,
   [chiliz.id]: 2,
   [spicy.id]: 2,
-  [base.id]: 4,
-  [baseSepolia.id]: 4,
 }
 
 const localStorageKeys = {
