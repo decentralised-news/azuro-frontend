@@ -12,11 +12,9 @@ const PageLayout: React.CFC = (props) => {
 
   return (
     <>
-      <Content>
-        <div className="flex-1">{children}</div>
-        <Footer />
-        <GlobalModalsRegistrar />
-      </Content>
+      <Content>{children}</Content>
+      <Footer />
+      <GlobalModalsRegistrar />
       <div id="modals" />
     </>
   )

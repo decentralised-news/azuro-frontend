@@ -1,99 +1,194 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
-// import { openModal } from '@locmod/modal'
-import { useWallet } from 'wallet'
+import { Message } from '@locmod/intl'
+import { useLive } from '@azuro-org/sdk'
+import { openModal } from '@locmod/modal'
 import { usePrivy } from '@privy-io/react-auth'
+import { useWallet } from 'wallet'
+import cx from 'classnames'
 import { useFreezeBodyScroll } from 'hooks'
+
 import { Icon, Logo } from 'components/ui'
 import { Button, buttonMessages } from 'components/inputs'
+import { Href } from 'components/navigation'
 import Navigation from 'compositions/Navigation/Navigation'
 import LiveSwitcher from 'compositions/LiveSwitcher/LiveSwitcher'
+
 import Controls from '../Controls/Controls'
 
+import messages from './messages'
 
-const Content: React.FC = () => {
-  useFreezeBodyScroll()
+
+type NavItemProps = {
+  label: Intl.Message
+  isActive: boolean
+  to?: string
+  onClick?: () => void
+}
+
+const NavItem: React.FC<NavItemProps> = ({ label, isActive, to, onClick }) => {
+  const className = cx(
+    'relative h-16 flex items-center px-3 text-caption-14 font-semibold transition-colors select-none',
+    {
+      'text-white': isActive,
+      'text-grey-60 hover:text-white': !isActive,
+    }
+  )
+  const content = (
+    <>
+      <Message value={label} />
+      {
+        isActive && (
+          <span className="absolute bottom-0 left-3 right-3 h-[3px] rounded-t-full bg-brand-50" />
+        )
+      }
+    </>
+  )
+
+  if (to) {
+    return (
+      <Href to={to} className={className} onClick={onClick}>
+        {content}
+      </Href>
+    )
+  }
 
   return (
-    <div className="fixed top-[54px] bottom-0 left-0 nr:w-[22.5rem] mb:w-full bg-bg-l0 overflow-auto no-scrollbar">
-      <LiveSwitcher />
-      <Navigation className="mt-2" />
-    </div>
+    <button type="button" className={className} onClick={onClick}>
+      {content}
+    </button>
+  )
+}
+
+const MobileNavDrawer: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+  useEffect(() => {
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose()
+      }
+    }
+
+    document.addEventListener('keydown', handleKey)
+
+    return () => document.removeEventListener('keydown', handleKey)
+  }, [ onClose ])
+
+  return (
+    <>
+      <div className="fixed inset-0 top-16 z-[90] bg-navy-950/70" onClick={onClose} aria-hidden="true" />
+      <div className="fixed top-16 bottom-0 left-0 z-[95] w-full max-w-[20rem] bg-navy-900 border-r border-white/10 overflow-y-auto no-scrollbar scb-scroll pb-8">
+        <div className="p-3">
+          <LiveSwitcher />
+        </div>
+        <Navigation />
+      </div>
+    </>
   )
 }
 
 const Header: React.FC = () => {
   const { account, isReconnecting, isConnecting } = useWallet()
+  const { login } = usePrivy()
+  const { isLive, changeLive } = useLive()
   const pathname = usePathname()
-  const { login, connectOrCreateWallet } = usePrivy()
-  const [ isVisible, setVisibility ] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const [ isMenuVisible, setMenuVisible ] = useState(false)
 
-  const handleClick = () => {
-    setVisibility((v) => !v)
-  }
+  useFreezeBodyScroll(isMenuVisible)
 
   useEffect(() => {
-    if (isVisible) {
-      const handleOutsideClick = (event: MouseEvent) => {
-        const composedPath = event.composedPath()
-
-        if (!composedPath.includes(containerRef.current!)) {
-          setVisibility(false)
-        }
-      }
-
-      document.addEventListener('click', handleOutsideClick, { capture: true })
-
-      return () => {
-        document.removeEventListener('click', handleOutsideClick, {
-          capture: true,
-        })
-      }
-    }
-  }, [ isVisible ])
-
-  useEffect(() => {
-    setVisibility(false)
+    setMenuVisible(false)
   }, [ pathname ])
 
+  const isHome = pathname === '/'
+  const isProfile = pathname.startsWith('/profile')
+
+  const handleSportsClick = () => {
+    if (isLive) {
+      changeLive(false)
+    }
+  }
+
+  const handleLiveClick = () => {
+    if (!isLive) {
+      changeLive(true)
+    }
+  }
+
   return (
-    <div ref={containerRef} className="py-2 px-5 bg-bg-l0">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center">
-          <div onClick={handleClick}>
-            <Icon
-              className="text-grey-60 h-6 w-6 mr-3"
-              name={isVisible ? 'interface/close' : 'interface/burger_menu'}
+    <>
+      <header className="sticky top-0 z-[100] h-16 bg-navy-900 border-b border-white/10">
+        <div className="mx-auto h-full max-w-[1680px] px-3 ds:px-5 flex items-center gap-3">
+          <button
+            type="button"
+            className="ds:hidden -ml-1 p-2 text-grey-70 hover:text-white transition-colors"
+            aria-label={isMenuVisible ? 'Close navigation' : 'Open navigation'}
+            onClick={() => setMenuVisible(v => !v)}
+          >
+            <Icon className="size-6" name={isMenuVisible ? 'interface/close' : 'interface/burger_menu'} />
+          </button>
+
+          <Logo className="h-6 ds:h-7 w-auto shrink-0" />
+
+          <nav className="hidden ds:flex items-center h-full" aria-label="Primary">
+            <NavItem
+              label={messages.sports}
+              isActive={isHome && !isLive}
+              to="/"
+              onClick={handleSportsClick}
             />
+            <NavItem
+              label={messages.live}
+              isActive={isHome && isLive}
+              to="/"
+              onClick={handleLiveClick}
+            />
+            <NavItem label={messages.myBets} isActive={isProfile} to="/profile" />
+          </nav>
+
+          <div className="flex items-center ml-auto space-x-2">
+            <button
+              type="button"
+              className="hidden ds:flex items-center h-9 w-56 px-3 rounded-min bg-white/5 border border-white/10 text-grey-60 hover:text-white transition-colors"
+              onClick={() => openModal('SearchModal')}
+            >
+              <Icon className="size-4 mr-2 flex-none" name="interface/search" />
+              <span className="text-caption-13 text-ellipsis whitespace-nowrap overflow-hidden">{messages.search.en}</span>
+            </button>
+
+            <button
+              type="button"
+              className="ds:hidden p-2 text-grey-70 hover:text-white transition-colors"
+              aria-label="Search"
+              onClick={() => openModal('SearchModal')}
+            >
+              <Icon className="size-5" name="interface/search" />
+            </button>
+
+            {
+              Boolean(account) ? (
+                <Controls />
+              ) : (
+                <Button
+                  className="h-9"
+                  title={buttonMessages.connectWallet}
+                  size={32}
+                  loading={isConnecting || isReconnecting}
+                  onClick={login}
+                />
+              )
+            }
           </div>
-          <Logo className="max-w-[355px]" />
         </div>
-        {
-          Boolean(account)
-            ? <Controls />
-            : (
-              // <Button
-              //   className="ml-auto"
-              //   title={buttonMessages.connectWallet}
-              //   size={32}
-              //   loading={isConnecting || isReconnecting}
-              //   onClick={connectOrCreateWallet}
-              // />
-              <Button
-                className="ml-auto"
-                title={buttonMessages.connectWallet}
-                size={32}
-                loading={isConnecting || isReconnecting}
-                onClick={login}
-              />
-            )
-        }
-      </div>
-      {isVisible && <Content />}
-    </div>
+      </header>
+
+      {
+        isMenuVisible && (
+          <MobileNavDrawer onClose={() => setMenuVisible(false)} />
+        )
+      }
+    </>
   )
 }
 

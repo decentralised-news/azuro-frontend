@@ -4,11 +4,14 @@ import { BetslipDisableReason } from '@azuro-org/sdk'
 export default {
   empty: {
     title: {
-      en: 'Betslip is empty',
+      en: 'Your betslip is empty',
     },
     text: {
-      en: 'To add a bet to your betslip, choose a market and make your selection',
+      en: 'Select odds from any event to add a wager.',
     },
+  },
+  browse: {
+    en: 'Browse events',
   },
   settings: {
     en: 'Settings',
@@ -24,6 +27,15 @@ export default {
   },
   betAmount: {
     en: 'Bet amount',
+  },
+  stake: {
+    en: 'Stake',
+  },
+  totalOdds: {
+    en: 'Total odds',
+  },
+  potentialPayout: {
+    en: 'Potential payout',
   },
   totalBet: {
     en: 'Total bet',

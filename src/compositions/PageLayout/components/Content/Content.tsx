@@ -4,50 +4,35 @@ import React from 'react'
 import cx from 'classnames'
 
 import { Media } from 'components/layout'
-import MobileBetslipButton from 'compositions/MobileBetslipButton/MobileBetslipButton'
-import MobileStatisticsButton from 'compositions/MobileStatisticsButton/MobileStatisticsButton'
+import MobileBottomNav from 'compositions/MobileBottomNav/MobileBottomNav'
 
 import { LeftSidebar, RightSidebar, Header, Search } from './components'
 
-import ns from './Narrow.module.scss'
-import ws from './Wide.module.scss'
-
 
 const Content: React.CFC = ({ children }) => {
-
-  const rootClassName = cx('h-full flex flex-col wd:flex-row min-h-screen mx-auto wd:px-2 wd:pb-2', ws.root)
-  const mainClassName = cx(ns.main, ws.main,
-    'mx-auto flex-1 w-full wd:h-auto',
-    {
-      [ws.withRightSidebar]: true,
-    }
-  )
-  const sidebarClassName = 'sticky top-0 z-[100] shrink-0 no-scrollbar'
-
   return (
-    <div className={rootClassName}>
-      <Media className={cx('h-screen', ws.leftSidebar, sidebarClassName, 'pr-2 overflow-auto')} wide>
-        <LeftSidebar />
-      </Media>
-      <Media className="sticky top-0 z-[100]" narrow mobile>
-        <Header />
-      </Media>
-      <main className={mainClassName}>
-        <Media wide>
-          <Search />
+    <div className="min-h-dvh flex flex-col bg-navy-950">
+      <Header />
+      <div className="flex-1 w-full mx-auto flex gap-3 wd:px-4 wd:py-4 max-w-[1680px]">
+        <Media className="sticky top-16 h-[calc(100dvh_-_4rem)] shrink-0 overflow-y-auto no-scrollbar scb-scroll" wide>
+          <LeftSidebar />
         </Media>
-        <div className="flex flex-col bg-bg-l1 border border-grey-10 wd:rounded-l-md -wd:rounded-t-md px-2 min-h-[calc(100vh_-_4.5rem)]">
-          {children}
-        </div>
-      </main>
-      <Media className={cx('h-[calc(100vh_-_0.5rem)]', ws.rightSidebar, sidebarClassName)} wide>
-        <RightSidebar />
-      </Media>
+
+        <main className="scb-workspace flex-1 min-w-0 flex flex-col bg-surface border border-border wd:rounded-md">
+          <Media className="flex-none" wide>
+            <Search />
+          </Media>
+          <div className="flex-1 px-2 mb:pb-24">
+            {children}
+          </div>
+        </main>
+
+        <Media className="sticky top-16 h-[calc(100dvh_-_4rem)] shrink-0 overflow-y-auto no-scrollbar scb-scroll" wide>
+          <RightSidebar />
+        </Media>
+      </div>
       <Media narrow mobile>
-        <div className="fixed left-1/2 -translate-x-1/2 bottom-2 z-[40] flex items-center justify-center space-x-2">
-          <MobileStatisticsButton />
-          <MobileBetslipButton />
-        </div>
+        <MobileBottomNav />
       </Media>
     </div>
   )

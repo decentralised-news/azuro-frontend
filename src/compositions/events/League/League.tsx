@@ -19,7 +19,7 @@ export const LeagueSkeleton: React.FC<{isPage?: boolean}> = ({ isPage = false })
             <div className="bone h-[1.375rem] w-44 rounded-full" />
           </div>
         ) : (
-          <div className="rounded-t-md flex items-center justify-between py-2 px-4 bg-bg-l2 mb-[2px]">
+          <div className="rounded-t-md flex items-center justify-between py-2 px-4 bg-surface-subtle border border-grey-10 mb-[2px]">
             <div className="flex items-center">
               <div className="bone size-4 mr-2 rounded-full" />
               <div className="bone h-[0.875rem] w-[8rem] rounded-md" />
@@ -69,12 +69,12 @@ const League: React.FC<LeagueProps> = ({ sportSlug, league, isPage = false }) =>
             <div className="text-heading-h4 font-semibold">{name}</div>
           </div>
         ) : (
-          <div className="rounded-t-md flex items-center justify-between py-2 px-4 bg-bg-l2 mb-[2px]">
+          <div className="rounded-t-md flex items-center justify-between py-2 px-4 bg-surface-subtle border border-grey-10 mb-[2px]">
             <Href to={leagueUrl} className="flex items-center hover:underline">
               <Flag className="mr-2" country={countrySlug} />
               <div className="text-caption-12 text-grey-70">{countryName}</div>
               <div className="size-1 rounded-full mx-2 bg-grey-20" />
-              <div className="text-caption-12">{name}</div>
+              <div className="text-caption-12 font-semibold">{name}</div>
             </Href>
           </div>
         )
@@ -94,7 +94,7 @@ const League: React.FC<LeagueProps> = ({ sportSlug, league, isPage = false }) =>
             />
           )) : (
             <div
-              className="mb:h-[var(--mb-h)] ds:h-[var(--ds-h)] box-content w-full bg-bg-l2 last-of-type:rounded-b-md"
+              className="mb:h-[var(--mb-h)] ds:h-[var(--ds-h)] box-content w-full bg-white border border-grey-10 last-of-type:rounded-b-md"
               style={{ '--mb-h': `${7.125 * games.length}rem`, '--ds-h': `${5 * games.length}rem`, paddingTop: `${(games.length - 1) * 2}px` }}
             />
           )

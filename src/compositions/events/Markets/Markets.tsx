@@ -63,10 +63,10 @@ const MobileMarkets: React.FC<MobileMarketsProps> = (props) => {
   return (
     <Overlay className="flex items-end" onClick={onClose}>
       <div
-        className="relative w-full bg-grey-10 rounded-t-min px-4 pb-4 max-h-[70vh] overflow-auto no-scrollbar"
+        className="relative w-full bg-white rounded-t-md px-4 pb-4 max-h-[70vh] overflow-auto no-scrollbar"
         onClick={handleContentClick}
       >
-        <div className="flex items-center justify-between p-4 -mx-4 bg-grey-10 sticky top-0 z-10">
+        <div className="flex items-center justify-between p-4 -mx-4 bg-white sticky top-0 z-10 border-b border-grey-10">
           <Message className="text-caption-13 font-semibold" value={messages.markets} />
           <div className="size-4 text-grey-90" onClick={onClose}>
             <Icon name="interface/close" />
@@ -92,7 +92,7 @@ export const MarketsSkeleton: React.FC = () => {
     <div className="ds:p-2 border border-transparent">
       <div className="flex">
         <MarketSkeleton />
-        <div className="bone size-7 mt-5 ml-2 rounded-min flex-none border border-transparent" />
+        <div className="bone size-7 mt-5 ml-2 rounded-ssm flex-none border border-transparent" />
       </div>
     </div>
   )
@@ -117,13 +117,13 @@ const Content: React.FC<ContentProps> = ({ markets, game }) => {
   const isDisabled = !Boolean(otherMarkets.length) && headMarket.conditions.length === 1 && headMarket.conditions[0].outcomes.length <= 3
 
   const contentClassName = cx('w-full flex mb:border-transparent ds:p-2 border', {
-    'absolute bg-grey-10 overflow-y-auto no-scrollbar max-h-[20rem] border-grey-15 pb-2 z-30 rounded-md': isOpen && !isMobileView,
+    'absolute bg-white overflow-y-auto no-scrollbar max-h-[20rem] border-grey-15 pb-2 z-30 rounded-md shadow-panel': isOpen && !isMobileView,
     'border-transparent': !isOpen,
   })
   const buttonClassName = cx(
-    'size-7 flex items-center justify-center flex-none rounded-min',
-    'group border border-grey-20 text-gray-70 ml-2 mt-5 sticky top-5',
-    'disabled:cursor-not-allowed disabled:text-grey-40 disabled:border-grey-10',
+    'size-7 flex items-center justify-center flex-none rounded-ssm',
+    'group border border-grey-20 text-grey-60 ml-2 mt-5 sticky top-5 bg-white',
+    'disabled:cursor-not-allowed disabled:text-grey-40 disabled:border-grey-10 disabled:bg-grey-10',
     {
       'hover:text-grey-90 hover:border-grey-40': !isDisabled,
     }

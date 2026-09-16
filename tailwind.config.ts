@@ -21,76 +21,106 @@ const config: Config = {
       '2wd': '1366px', // for more control (view where both sidebars are fixed in viewport)
     },
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
       colors: {
-        'brand-70': '#B84200',
-        'brand-60': '#E66001',
-        'brand-50': '#FF6B00',
-        'brand-15': '#3A2B20',
-        'brand-10': '#642900',
-        'brand-5': '#331500',
+        // SmartContractBets brand
+        'brand-70': '#8f1818',
+        'brand-60': '#a51c1c',
+        'brand-50': '#b82020',
+        'brand-15': '#2a0d0d',
+        'brand-10': '#3d1212',
+        'brand-5': '#241010',
 
-        // 'brand-70': '#A82A2A',   // Deep, dark red (like your B84200 but red)  
-        // 'brand-60': '#D33536',   // Your main color (vibrant, bold red)  
-        // 'brand-50': '#F04E4F',   // Slightly brighter red (like your FF6B00)  
-        // 'brand-40': '#FF6B6B',   // Lighter red (for accents/hover states)  
-        // 'brand-30': '#FF9E9E',   // Soft red (for subtle UI elements)  
-        // 'brand-20': '#FFD4D4',   // Very light red (backgrounds)  
+        // slate neutrals
+        'grey-90': '#f1f5f9',
+        'grey-70': '#cbd5e1',
+        'grey-60': '#94a3b8',
+        'grey-40': '#64748b',
+        'grey-20': '#475569',
+        'grey-15': '#334155',
+        'grey-10': '#1e293b',
 
-        'grey-90': '#EBEBEB',
-        'grey-70': '#ADADAD',
-        'grey-60': '#999999',
-        'grey-40': '#7E7E7E',
-        'grey-20': '#3B3B3B',
-        'grey-15': '#2E2E2E',
-        'grey-10': '#1F1F1F',
+        // navy surfaces (dark chrome)
+        'bg-l0': '#0f172a',
+        'bg-l1': '#141e32',
+        'bg-l2': '#1e293b',
+        'bg-l3': '#334155',
 
-        'bg-l0': '#111111',
-        'bg-l1': '#171717',
-        'bg-l2': '#242424',
-        'bg-l3': '#2E2E2E',
+        // semantic accent colors
+        'accent-pink': '#ec4899',
+        'accent-pink-5': '#3b2330',
 
-        'accent-pink': '#F768A0',
-        'accent-pink-5': '#442E37',
+        'accent-green': '#22c55e',
+        'accent-green-5': '#12201a',
+        'accent-green-10': '#166534',
 
-        'accent-green': '#3EFF8B',
-        'accent-green-5': '#122018',
-        'accent-green-10': '#134C2A',
+        'accent-yellow': '#eab308',
+        'accent-yellow-10': '#423a10',
 
-        'accent-yellow': '#EFB72A',
-        'accent-yellow-10': '#E5B02B1A',
+        'accent-red': '#dc2626',
+        'accent-red-5': '#2a1215',
+        'accent-red-10': '#451a1a',
 
-        'accent-red': '#F42E52',
-        'accent-red-5': '#3D1F24',
-        'accent-red-10': '#632C2A',
+        'accent-blue': '#3b82f6',
 
-        'accent-blue': '#7B58ED',
+        'accent-purple': '#a855f7',
 
-        'accent-purple': '#CA5AFF',
+        // Semantic design-system tokens (light workspace)
+        surface: {
+          DEFAULT: '#ffffff',
+          subtle: '#f8fafc',
+          muted: '#eef2f6',
+        },
+        navy: {
+          950: '#080d19',
+          900: '#0f172a',
+          850: '#141e32',
+          800: '#1e293b',
+          700: '#334155',
+        },
+        border: {
+          DEFAULT: '#e2e8f0',
+          strong: '#cbd5e1',
+        },
+        success: '#15803d',
+        'success-bg': '#f0fdf4',
+        warning: '#b45309',
+        'warning-bg': '#fffbeb',
+        danger: '#b91c1c',
+        'danger-bg': '#fef2f2',
+        info: '#0369a1',
+        'info-bg': '#f0f9ff',
       },
       borderRadius: {
         'ssm': '0.375rem', // 6
         'min': '0.5rem', // 8
-        'sm': '0.75rem', // 12
-        'md': '1rem', // 16
-        'lg': '1.25rem', // 20
+        'sm': '0.625rem', // 10
+        'md': '0.75rem', // 12
+        'lg': '1rem', // 16
+      },
+      boxShadow: {
+        'betslip': '0px -10px 30px rgba(8, 13, 25, 0.6)',
+        'sm': '0 1px 2px rgba(15, 23, 42, 0.05)',
+        'md': '0 4px 14px rgba(15, 23, 42, 0.08)',
+        'panel': '0 10px 30px rgba(15, 23, 42, 0.10)',
+        'card': '0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.06)',
       },
       backgroundImage: ({ theme }) => ({
-        'card-border-top': 'linear-gradient(180deg, rgba(239, 239, 243, 0.15) 0%, rgba(239, 239, 243, 0) 100%)',
-        'card-border-bottom': 'linear-gradient(180deg, rgba(239, 239, 243, 0) 0%, rgba(239, 239, 243, 0.15) 100%)',
-        'live-switcher-bg': 'linear-gradient(90deg, rgba(61, 32, 31, 0.5) 0%, rgba(61, 32, 31, 0) 100%)',
+        'card-border-top': 'linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0) 100%)',
+        'card-border-bottom': 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.10) 100%)',
+        'live-switcher-bg': 'linear-gradient(90deg, rgba(220, 38, 38, 0.22) 0%, rgba(220, 38, 38, 0) 100%)',
         'betslip-item-bg': `linear-gradient(90.08deg, ${theme('colors.bg-l2')} 0.06%, ${theme('colors.brand-10')} 300%)`,
-        'betslip-item-bg-inc': `linear-gradient(90.08deg, ${theme('colors.bg-l2')} 0.06%, ${theme('colors.accent-green')} 300%)`,
-        'betslip-item-bg-dec': `linear-gradient(90.08deg, ${theme('colors.bg-l2')} 0.06%, ${theme('colors.accent-red')} 300%)`,
+        'betslip-item-bg-inc': `linear-gradient(90.08deg, ${theme('colors.bg-l2')} 0.06%, ${theme('colors.accent-green-10')} 300%)`,
+        'betslip-item-bg-dec': `linear-gradient(90.08deg, ${theme('colors.bg-l2')} 0.06%, ${theme('colors.accent-red-10')} 300%)`,
         'live-game-shadow': `linear-gradient(90deg, ${theme('colors.accent-red')} -1000%, ${theme('colors.bg-l2')} 100%)`,
         'live-bet-shadow': `linear-gradient(90deg, ${theme('colors.bg-l3')} 0%, ${theme('colors.accent-red')} 800%)`,
-        'result-button-won': `linear-gradient(180deg, ${theme('colors.grey-15')} 0%, ${theme('colors.accent-green')} 1500%)`,
-        'result-button-lost': `linear-gradient(90deg, ${theme('colors.grey-15')} 0%, ${theme('colors.accent-red')} 1500%)`,
-        'bet-game-won': `linear-gradient(180deg, ${theme('colors.bg-l3')} 0%, ${theme('colors.accent-green')} 1000%)`,
-        'bet-game-lost': `linear-gradient(180deg, ${theme('colors.bg-l3')} 0%, ${theme('colors.accent-red')} 1000%)`,
+        'result-button-won': `linear-gradient(180deg, ${theme('colors.grey-15')} 0%, ${theme('colors.accent-green-10')} 1500%)`,
+        'result-button-lost': `linear-gradient(90deg, ${theme('colors.grey-15')} 0%, ${theme('colors.accent-red-10')} 1500%)`,
+        'bet-game-won': `linear-gradient(180deg, ${theme('colors.bg-l3')} 0%, ${theme('colors.accent-green-10')} 1000%)`,
+        'bet-game-lost': `linear-gradient(180deg, ${theme('colors.bg-l3')} 0%, ${theme('colors.accent-red-10')} 1000%)`,
         'live-event-gradient': `linear-gradient(90deg, transparent 0%, ${theme('colors.accent-red')} 50%, transparent 100%)`,
-      }),
-      boxShadow: ({ theme }) => ({
-        'betslip': `0px -10px 30px ${theme('colors.bg-l1')}`,
       }),
       fill: {
         'gradient-azuro-waves-grey': '#c4cfe4',
@@ -108,13 +138,11 @@ const config: Config = {
   plugins: [
     require('@headlessui/tailwindcss'),
     plugin(({ addComponents, matchUtilities, theme }) => {
-      // addBase({
-      //   'body': { backgroundColor: theme('colors.test') },
-      // })
       addComponents({
         '.text-heading-h1': {
           fontSize: '1.75rem', // 28
           lineHeight: '2.25rem', // 36
+          fontWeight: '700',
         },
         '.text-heading-h2': {
           fontSize: '1.5rem', // 24
@@ -147,6 +175,9 @@ const config: Config = {
         '.text-label-12': {
           fontSize: '0.688rem', // 11
           lineHeight: '0.813rem', // 13
+        },
+        '.tabular-nums': {
+          fontVariantNumeric: 'tabular-nums',
         },
       })
     }),

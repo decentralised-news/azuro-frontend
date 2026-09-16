@@ -7,6 +7,7 @@ import { LeagueSkeleton } from 'compositions/events/League/League'
 import TopEvents from 'compositions/events/TopEvents/TopEvents'
 import EmptyContent from 'compositions/events/EmptyContent/EmptyContent'
 import Navbar from 'compositions/events/Navbar/Navbar'
+import Hero from 'compositions/events/Hero/Hero'
 import FilteredLeagues from 'compositions/events/FilteredLeagues/FilteredLeagues'
 import UniqueEvents from 'compositions/events/UniqueEvents/UniqueEvents'
 
@@ -53,6 +54,7 @@ const Sports: React.FC = () => {
 export default function TopPage() {
   return (
     <>
+      <Hero />
       <TopEvents />
       <Navbar>
         <Sports />

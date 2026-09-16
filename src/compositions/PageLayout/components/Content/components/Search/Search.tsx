@@ -11,11 +11,15 @@ import messages from './messages'
 const Search: React.FC = () => {
   return (
     <div
-      className="h-16 w-full flex items-center text-grey-40 hover:text-grey-90 py-3 px-6 bg-bg-l0 cursor-pointer"
+      className="h-14 w-full flex items-center gap-3 text-grey-60 hover:text-grey-90 px-4 border-b border-grey-10 bg-surface cursor-pointer transition-colors wd:rounded-t-md"
+      role="search"
       onClick={() => openModal('SearchModal')}
     >
-      <Icon className="size-5 mr-2" name="interface/search" />
+      <Icon className="size-5 flex-none" name="interface/search" />
       <Message className="text-caption-13" value={messages.title} />
+      <span className="ml-auto hidden ds:inline-flex items-center h-6 px-1.5 rounded-ssm border border-grey-10 text-caption-12 text-grey-40">
+        ⌘K
+      </span>
     </div>
   )
 }

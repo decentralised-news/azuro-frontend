@@ -18,7 +18,7 @@ export default {
   date: {
     en: 'Date',
   },
-  
+
   // Your original messages
   betslip: {
     en: 'Betslip',

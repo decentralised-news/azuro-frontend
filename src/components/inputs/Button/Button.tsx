@@ -46,21 +46,21 @@ const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonProps>((p
   }
 
   const rootClassName = cx(className,
-    'flex items-center justify-center whitespace-nowrap uppercase font-bold transition-all border rounded-sm',
+    'flex items-center justify-center whitespace-nowrap font-bold transition-colors border rounded-ssm',
     'text-center align-top cursor-pointer select-none disabled:cursor-not-allowed disabled:transition-none',
     {
       'text-caption-14 h-10 px-4': size === 40,
       'text-caption-13 h-8 px-3': size === 32,
       // primary
-      'border-white/20 bg-brand-50 text-grey-90': style === 'primary',
-      'hover:text-black hover:bg-white hover:border-white': style === 'primary',
-      'disabled:text-grey-20 disabled:bg-bg-l1 disabled:border-grey-10': style === 'primary' || style === 'secondary',
+      'border-brand-60 bg-brand-50 text-white': style === 'primary',
+      'hover:bg-brand-60 hover:border-brand-50': style === 'primary',
+      'disabled:text-grey-40 disabled:bg-grey-10 disabled:border-grey-10': style === 'primary' || style === 'secondary',
       // secondary
-      'border-white/20 bg-grey-20 text-grey-90': style === 'secondary',
-      'hover:text-black hover:bg-grey-90 hover:border-grey-90': style === 'secondary',
+      'border-navy-700 bg-navy-800 text-white': style === 'secondary',
+      'hover:bg-navy-700 hover:border-navy-700': style === 'secondary',
       // tertiary
       'border-grey-15 bg-transparent text-grey-60': style === 'tertiary',
-      'hover:text-brand-60': style === 'tertiary',
+      'hover:text-brand-50 hover:border-grey-40': style === 'tertiary',
       'disabled:text-grey-20': style === 'tertiary',
     }
   )

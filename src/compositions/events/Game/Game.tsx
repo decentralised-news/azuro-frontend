@@ -15,7 +15,7 @@ import Markets, { MarketsSkeleton } from 'compositions/events/Markets/Markets'
 
 
 export const GameSkeleton: React.FC<{ className?: string }> = ({ className }) => {
-  const rootClassName = cx('flex mb:flex-col ds:items-center justify-between py-2 px-4 bg-bg-l2 last-of-type:rounded-b-md', className)
+  const rootClassName = cx('flex mb:flex-col ds:items-center justify-between py-2 px-4 bg-white border border-grey-10 last-of-type:rounded-b-md', className)
 
   return (
     <div className={rootClassName}>
@@ -73,14 +73,14 @@ const Game: React.FC<GameProps> = ({ className, leagueUrl, game, withTopRadius, 
 
   const rootClassName = cx(
     'group flex mb:flex-col ds:items-center justify-between',
-    'py-2 ds:pl-4 ds:pr-2 mb:px-2 bg-bg-l2 last-of-type:rounded-b-md relative',
+    'py-2 ds:pl-4 ds:pr-2 mb:px-2 bg-white border border-grey-10 last-of-type:rounded-b-md relative',
     'mb:h-[7.125rem] ds:h-20',
     className,
     {
       'first-of-type:rounded-t-md': withTopRadius || isUnique,
     })
   const liveClassName = cx(
-    'absolute h-full before:content-[\'*\'] before:h-full before:w-0.5 before:absolute before:top-0 before:left-0 before:bg-accent-red overflow-hidden',
+    'absolute h-full before:content-[\'*\'] before:h-full before:w-[3px] before:absolute before:top-0 before:left-0 before:bg-accent-red overflow-hidden',
     'left-0 top-0 bg-live-game-shadow w-[30%] group-last-of-type:rounded-b-md',
     {
       'group-first-of-type:rounded-t-md': withTopRadius,

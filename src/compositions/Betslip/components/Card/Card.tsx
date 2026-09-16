@@ -15,13 +15,10 @@ import messages from './messages'
 
 type ItemProps = {
   item: AzuroSDK.BetslipItem
-  // batchBetAmount: string
   state: ConditionState
   odds: number
   isStatesFetching: boolean
   isOddsFetching: boolean
-  // isBatch: boolean
-  // onBatchAmountChange: (value: string) => void
 }
 
 const Card: React.FC<ItemProps> = (props) => {
@@ -69,14 +66,14 @@ const Card: React.FC<ItemProps> = (props) => {
     }
   )
   const oddsClassName = cx(
-    'h-5 flex items-center px-[0.375rem] bg-brand-5 border',
-    'border-brand-10 rounded-sm text-brand-50 text-caption-12',
+    'h-6 flex items-center px-2 bg-brand-50/10 border',
+    'border-brand-50/25 rounded-ssm text-brand-50 text-caption-12 font-bold tabular-nums',
     'group-[.increased]/card:bg-accent-green-5 group-[.increased]/card:border-accent-green-10 group-[.increased]/card:text-accent-green',
     'group-[.decreased]/card:bg-accent-red-5 group-[.decreased]/card:border-accent-red-10 group-[.decreased]/card:text-accent-red'
   )
 
   return (
-    <div ref={nodeRef} className="group/card rounded-md overflow-hidden">
+    <div ref={nodeRef} className="group/card rounded-md overflow-hidden border border-white/5">
       <div className="bg-bg-l2 py-2 px-4">
         <div className="flex items-center justify-between">
           <div
@@ -97,7 +94,11 @@ const Card: React.FC<ItemProps> = (props) => {
               )
             }
           </div>
-          <button className="text-grey-60 hover:text-grey-90 transition ml-2 p-1" onClick={() => removeItem(item)}>
+          <button
+            className="text-grey-60 hover:text-grey-90 transition ml-2 p-1"
+            aria-label="Remove selection"
+            onClick={() => removeItem(item)}
+          >
             <Icon className="size-3" name="interface/close" />
           </button>
         </div>
@@ -130,7 +131,7 @@ const Card: React.FC<ItemProps> = (props) => {
                       <span className="text-grey-60 mr-1">{marketName}:</span>
                     )
                   }
-                  <span>{selectionName}</span>
+                  <span className="font-medium">{selectionName}</span>
                 </div>
                 {
                   isOddsFetching ? (
@@ -140,26 +141,6 @@ const Card: React.FC<ItemProps> = (props) => {
                   )
                 }
               </div>
-              {/* {
-                isBatch && (
-                  <div className="flex items-center mt-2">
-                    <Input
-                      className="bg-grey-15"
-                      type="number"
-                      value={batchBetAmount}
-                      placeholder="0.00"
-                      leftNode={<Icon className="size-4 mr-2" name={constants.currencyIcons[appChain.id]} />}
-                      onChange={onBatchAmountChange}
-                    />
-                    <div className="text-right ml-3">
-                      <Message className="text-caption-12 text-grey-60 w-max" value={messages.possibleWin} tag="p" />
-                      <div className="text-caption-13 text-brand-50 font-semibold mt-0.5 w-max text-right ml-auto">
-                        {formatToFixed(oddsRef.current * +batchBetAmount, 2)} {betToken.symbol}
-                      </div>
-                    </div>
-                  </div>
-                )
-              } */}
             </>
           )
         }

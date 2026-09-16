@@ -84,9 +84,9 @@ const Card: React.FC<CardProps> = ({ game }) => {
   })
 
   return (
-    <div className="bg-card-border-bottom p-px rounded-md overflow-hidden">
-      <div className="p-4 bg-grey-10 rounded-md">
-        <Href to={`/${sportSlug}/${countrySlug}/${leagueSlug}/${gameId}`} className="flex items-center justify-center text-grey-60 text-caption-13 hover:underline">
+    <div className="h-full p-px rounded-md">
+      <div className="flex flex-col h-full p-4 bg-white border border-grey-10 rounded-md shadow-sm">
+        <Href to={`/${sportSlug}/${countrySlug}/${leagueSlug}/${gameId}`} className="flex items-center justify-center text-grey-60 text-caption-13 hover:text-grey-90 hover:underline">
           <Icon className="size-4 mr-2 flex-none" name={`sport/${sportSlug}` as IconName} />
           <span className="text-ellipsis whitespace-nowrap overflow-hidden">{countryName}</span>
           <div className="size-[2px] rounded-full bg-grey-20 mx-1" />
@@ -96,18 +96,18 @@ const Card: React.FC<CardProps> = ({ game }) => {
           <OpponentLogo image={participants[0].image} size={48} />
           <div className="text-caption-12 text-center">
             <div className="text-grey-60">{date}</div>
-            <div className="font-semibold mt-[2px]">{time}</div>
+            <div className="font-bold mt-[2px] tabular-nums">{time}</div>
           </div>
           <OpponentLogo image={participants[1].image} size={48} />
         </div>
-        <div className="mt-5 text-caption-13 font-semibold text-center text-ellipsis whitespace-nowrap overflow-hidden">{title}</div>
-        <div className="mt-3 flex items-center space-x-2">
+        <div className="mt-4 text-caption-13 font-semibold text-center text-ellipsis whitespace-nowrap overflow-hidden">{title}</div>
+        <div className="mt-3 flex items-center space-x-2 flex-1">
           {
             isFetching ? (
               <>
-                <div className="bone w-full h-7 rounded-sm" />
-                <div className="bone w-full h-7 rounded-sm" />
-                <div className="bone w-full h-7 rounded-sm" />
+                <div className="bone w-full h-7 rounded-ssm" />
+                <div className="bone w-full h-7 rounded-ssm" />
+                <div className="bone w-full h-7 rounded-ssm" />
               </>
             ) : (
               <Condition markets={markets!} game={game} />
@@ -167,9 +167,9 @@ const Events: React.FC = () => {
   }
 
   return (
-    <div ref={containerRef} className="glide !static group mt-6">
+    <div ref={containerRef} className="glide !static group mt-5">
       <div className="glide__track" data-glide-el="track">
-        <ul className="glide__slides">
+        <ul className="glide__slides items-stretch">
           {
             games?.map((game, index) => (
               <li key={index} className="glide__slide overflow-hidden">
@@ -180,10 +180,10 @@ const Events: React.FC = () => {
         </ul>
       </div>
       <div className="absolute top-6 right-6 flex items-center" data-glide-el="controls">
-        <button className="w-8 h-6 flex items-center justify-center bg-bg-l0 rounded-tl-full rounded-tr-1 rounded-br-1 rounded-bl-full border border-grey-15 text-grey-60 hover:text-grey-90 transition" data-glide-dir="<">
+        <button className="w-8 h-7 flex items-center justify-center bg-white border border-grey-10 rounded-ssm text-grey-60 hover:text-grey-90 transition shadow-sm" data-glide-dir="<">
           <Icon className="size-5" name="interface/chevron_left" />
         </button>
-        <button className="w-8 h-6 flex items-center justify-center bg-bg-l0 rounded-tl-1 rounded-tr-full rounded-br-full rounded-bl-1 border border-grey-15 text-grey-60 hover:text-grey-90 transition ml-1" data-glide-dir=">">
+        <button className="w-8 h-7 flex items-center justify-center bg-white border border-grey-10 rounded-ssm text-grey-60 hover:text-grey-90 transition shadow-sm ml-1" data-glide-dir=">">
           <Icon className="size-5" name="interface/chevron_right" />
         </button>
       </div>
@@ -196,17 +196,17 @@ const TopEvents: React.FC = () => {
   const sport = messages[params.sportSlug as string]
 
   return (
-    <div className="relative pt-6">
-      <div className="px-4">
-        <Message className="text-caption-13 text-grey-60 uppercase" value={messages.title} />
-        <h1 className="text-heading-h1 font-bold">
+    <div className="relative pt-5 pb-1">
+      <div className="px-1">
+        <Message className="text-caption-12 text-grey-60 uppercase tracking-wider font-semibold" value={messages.title} />
+        <h1 className="text-heading-h1 font-bold flex items-center gap-2">
           <Message className="text-brand-50" value={messages.top} />
           {
             Boolean(sport) && (
-              <Message className="ml-2" value={sport} />
+              <Message value={sport} />
             )
           }
-          <Message className="ml-2" value={messages.events} />
+          <Message className="text-grey-40" value={messages.events} />
         </h1>
       </div>
       <Events />

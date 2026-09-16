@@ -1,8 +1,7 @@
 import { useChain, useDetailedBetslip, BetslipDisableReason } from '@azuro-org/sdk'
 import React from 'react'
-import { constants } from 'helpers'
+import { toLocaleString } from 'helpers'
 
-import { Icon } from 'components/ui'
 import { Input } from 'components/inputs'
 
 
@@ -11,8 +10,8 @@ type AmountInputProps = {
 }
 
 const AmountInput: React.FC<AmountInputProps> = ({ isEnoughBalance }) => {
-  const { appChain } = useChain()
-  const { betAmount, changeBetAmount, disableReason } = useDetailedBetslip()
+  const { appChain, betToken } = useChain()
+  const { betAmount, changeBetAmount, disableReason, minBet, maxBet } = useDetailedBetslip()
 
   const isError = !isEnoughBalance || [
     BetslipDisableReason.BetAmountGreaterThanMaxBet,
@@ -20,15 +19,27 @@ const AmountInput: React.FC<AmountInputProps> = ({ isEnoughBalance }) => {
   ].includes(disableReason!)
 
   return (
-    <Input
-      className="rounded-b-ssm"
-      type="number"
-      value={betAmount}
-      placeholder="0.00"
-      leftNode={<Icon className="size-5 mr-2" name={constants.currencyIcons[appChain.id]} />}
-      onChange={changeBetAmount}
-      isError={isError}
-    />
+    <div>
+      <Input
+        className="rounded-ssm"
+        type="number"
+        value={betAmount}
+        placeholder="0.00"
+        rightNode={
+          <span className="ml-2 flex-none text-caption-13 font-semibold text-grey-60">{betToken.symbol}</span>
+        }
+        onChange={changeBetAmount}
+        isError={isError}
+      />
+      <div className="flex items-center justify-between mt-1 px-1 text-caption-12 text-grey-60">
+        <span>
+          Min {toLocaleString(minBet || 0, { digits: 2 })}
+        </span>
+        <span>
+          Max {toLocaleString(maxBet || 0, { digits: 2 })}
+        </span>
+      </div>
+    </div>
   )
 }
 

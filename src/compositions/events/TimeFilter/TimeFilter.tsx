@@ -120,30 +120,31 @@ const TimeFilter: React.FC<TimeFilterProps> = ({ className }) => {
   const { filterByTime, setFilterByTime } = useFilterByTime()
 
   return (
-    <div className={cx('flex items-stretch overflow-hidden', className)}>
+    <div
+      className={cx('flex items-center gap-1 p-1 bg-grey-10 rounded-ssm overflow-x-auto no-scrollbar', className)}
+      role="tablist"
+      aria-label="Filter events by start time"
+    >
       {
         items.map(({ title, value }) => {
           const isActive = value === filterByTime
 
-          const className = cx('px-2 text-caption-14 font-medium', {
-            'text-grey-60 hover:text-grey-90 transition': !isActive,
-            'text-grey-90': isActive,
+          const className = cx('h-8 px-2.5 flex items-center whitespace-nowrap text-caption-13 font-medium rounded-ssm transition-colors cursor-pointer', {
+            'text-grey-60 hover:text-grey-90': !isActive,
+            'text-white bg-navy-900 shadow-sm': isActive,
           })
 
           return (
-            <div key={value} className="relative flex items-center">
-              <button className="cursor-pointer" onClick={() => setFilterByTime(value)}>
-                <Message
-                  className={className}
-                  value={title}
-                />
-              </button>
-              {
-                isActive && (
-                  <div className="absolute z-20 -bottom-1 left-1/2 size-2 -ml-1 bg-brand-50 rounded-full pointer-events-none" />
-                )
-              }
-            </div>
+            <button
+              key={value}
+              type="button"
+              className={className}
+              role="tab"
+              aria-selected={isActive}
+              onClick={() => setFilterByTime(value)}
+            >
+              <Message value={title} />
+            </button>
           )
         })
       }

@@ -4,9 +4,11 @@ import React, { useState } from 'react'
 import { useBaseBetslip, useBetTokenBalance, useChain, useDetailedBetslip } from '@azuro-org/sdk'
 import { Message } from '@locmod/intl'
 import cx from 'classnames'
+import { toLocaleString } from 'helpers'
 
 import { Icon } from 'components/ui'
 import { Warning } from 'components/feedback'
+import { Href } from 'components/navigation'
 import ConnectButtonWrapper from 'compositions/ConnectButtonWrapper/ConnectButtonWrapper'
 import BettingTips from 'compositions/TabbedBetslip/BettingTips'
 
@@ -17,10 +19,18 @@ import messages from './messages'
 
 const EmptyContent: React.FC = () => {
   return (
-    <div className="max-w-64 text-center mx-auto mt-6">
-      <img className="size-16 mx-auto" src="/images/illustrations/betslip.png" alt="" />
+    <div className="max-w-64 text-center mx-auto mt-8 mb-6 px-4">
+      <div className="mx-auto size-12 flex items-center justify-center rounded-full bg-grey-10 text-grey-60">
+        <Icon className="size-6" name="interface/betslip" />
+      </div>
       <Message className="text-heading-h5 font-bold mt-4" value={messages.empty.title} tag="p" />
       <Message className="text-caption-13 mt-2 text-grey-60" value={messages.empty.text} tag="p" />
+      <Href
+        to="/"
+        className="mt-5 inline-flex items-center justify-center h-10 px-4 rounded-ssm bg-brand-50 text-white text-caption-14 font-bold uppercase transition-colors hover:bg-brand-60"
+      >
+        {messages.browse.en}
+      </Href>
     </div>
   )
 }
@@ -38,7 +48,7 @@ const Settings: React.FC<SettingsProps> = ({ onClose }) => {
           <Icon className="size-5" name="interface/close" />
         </button>
       </div>
-      <div className="space-y-2">
+      <div className="space-y-2 px-3 pb-3">
         <Slippage />
         <QuickBet />
       </div>
@@ -73,7 +83,7 @@ const Content: React.FC<ContentProps> = ({ openSettings }) => {
   const { betToken } = useChain()
   const { items, clear } = useBaseBetslip()
   const {
-    odds, states, minBet, maxBet, disableReason, betAmount, selectedFreebet,
+    odds, states, minBet, maxBet, disableReason, betAmount, selectedFreebet, totalOdds,
     isOddsFetching, isStatesFetching,
   } = useDetailedBetslip()
   const { data, isLoading: isBalanceFetching } = useBetTokenBalance()
@@ -84,13 +94,12 @@ const Content: React.FC<ContentProps> = ({ openSettings }) => {
 
   const isEnoughBalance = isBalanceFetching || !Boolean(+betAmount) ? true : Boolean(+balance! > +betAmount)
 
+  const freebetDiff = selectedFreebet && selectedFreebet.params.isSponsoredBetReturnable ? +selectedFreebet.amount : 0
+  const potentialPayout = totalOdds ? toLocaleString(+totalOdds * +betAmount - freebetDiff, { digits: 2 }) : '––'
+
   return (
     <div>
-      <div
-        className={
-          cx('px-4 flex justify-between py-3')
-        }
-      >
+      <div className="px-4 flex justify-between items-center py-3">
         {
           isSingle ? (
             <button className="cursor-default">
@@ -103,18 +112,6 @@ const Content: React.FC<ContentProps> = ({ openSettings }) => {
                 value={{ ...messages.combo, values: { count: itemsLength } }}
               />
             </button>
-            // <div className="flex items-center space-x-4">
-            //   <Tab
-            //     title={{ ...messages.batch, values: { count: itemsLength } }}
-            //     isActive={isBatch}
-            //     onClick={() => changeBatch(true)}
-            //   />
-            //   <Tab
-            //     title={{ ...messages.combo, values: { count: itemsLength } }}
-            //     isActive={!isBatch}
-            //     onClick={() => changeBatch(false)}
-            //   />
-            // </div>
           )
         }
         <div className={cx('flex items-center space-x-3 h-fit', { 'pt-0.5': !isSingle })}>
@@ -128,7 +125,7 @@ const Content: React.FC<ContentProps> = ({ openSettings }) => {
       </div>
       <div
         className={
-          cx('space-y-2 max-h-[24rem] overflow-auto no-scrollbar', {
+          cx('space-y-2 max-h-[24rem] overflow-auto no-scrollbar scb-scroll', {
             'pb-6': !isSingle,
             'pb-2': isSingle,
           })
@@ -142,30 +139,28 @@ const Content: React.FC<ContentProps> = ({ openSettings }) => {
               <Card
                 key={`${conditionId}-${outcomeId}`}
                 item={item}
-                // batchBetAmount={batchBetAmounts[`${conditionId}-${outcomeId}`]}
                 state={states[conditionId]}
                 odds={odds?.[`${conditionId}-${outcomeId}`]}
                 isStatesFetching={isStatesFetching}
                 isOddsFetching={isOddsFetching}
-                // isBatch={isBatch}
-                // onBatchAmountChange={(value) => changeBatchBetAmount(item, value)}
               />
             )
           })
         }
       </div>
-      <div
-        className={
-          cx({
-            '-mt-4': !isSingle,
-            'shadow-betslip rounded-lg': items.length > 2,
-          })
-        }
-      >
+      <div className={cx({ 'shadow-betslip rounded-lg': items.length > 2 })}>
         <SelectFreebet />
-        <div
-          className="bg-bg-l2 p-3 rounded-lg z-10 relative"
-        >
+        <div className="bg-bg-l2 p-3 rounded-lg z-10 relative">
+          <div className="flex items-center justify-between mb-3 px-1">
+            <div className="space-y-1">
+              <Message className="text-caption-12 text-grey-60 block" value={messages.totalOdds} />
+              <div className="text-caption-14 font-bold tabular-nums">{totalOdds || '––'}</div>
+            </div>
+            <div className="space-y-1 text-right">
+              <Message className="text-caption-12 text-grey-60 block" value={messages.potentialPayout} />
+              <div className="text-caption-14 font-bold tabular-nums text-brand-50">{potentialPayout} {betToken.symbol}</div>
+            </div>
+          </div>
           {
             Boolean(!selectedFreebet) && (
               <>
@@ -186,14 +181,6 @@ const Content: React.FC<ContentProps> = ({ openSettings }) => {
               />
             )
           }
-          {/* {
-          isBatch && (
-            <div className="flex items-center justify-between mb-3">
-              <Message className="text-caption-12 text-grey-60" value={messages.totalBet} />
-              <div className="text-caption-13">{betAmount} {betToken.symbol}</div>
-            </div>
-          )
-        } */}
           <div className="mt-3">
             <ConnectButtonWrapper>
               <BetButton isEnoughBalance={isEnoughBalance} isBalanceFetching={isBalanceFetching} />

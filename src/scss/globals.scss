@@ -28,7 +28,7 @@
     font-weight: 400;
     text-rendering: optimizelegibility;
     -webkit-font-smoothing: antialiased;
-    @apply bg-bg-l0;
+    @apply bg-navy-950;
     @apply text-grey-90;
   }
 
@@ -44,6 +44,11 @@
     &[type='number'] {
       -moz-appearance: textfield;
     }
+  }
+
+  ::selection {
+    background-color: rgba(184, 32, 32, 0.9);
+    color: #ffffff;
   }
 }
 
@@ -138,6 +143,22 @@ body {
   .rotate-y-0 {
     transform: rotateY(0deg);
   }
+
+  // SmartContractBets branded scrollbar for dark chrome panels
+  .scb-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #334155 transparent;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #334155;
+      border-radius: 9999px;
+    }
+  }
 }
 
 @layer utilities {
@@ -149,5 +170,112 @@ body {
 
   .min-h-dvh {
     min-height: 100dvh;
+  }
+
+  .scb-hero-grid {
+    background-image:
+      linear-gradient(rgba(241, 245, 249, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(241, 245, 249, 0.08) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+}
+
+/**
+ * SmartContractBets market workspace
+ * The chrome (header, sidebars, betslip, footer) stays dark navy while the
+ * market-reading workspace is rendered on light surfaces for readability.
+ * These scoped overrides remap the legacy dark utility classes inside the
+ * workspace without touching component markup or Azuro logic.
+ */
+.scb-workspace {
+  color: #0f172a;
+
+  // ---- surfaces -----------------------------------------------------------
+  .bg-bg-l0 { background-color: #f5f7fa; }
+  .bg-bg-l1 { background-color: #ffffff; }
+  .bg-bg-l2 { background-color: #ffffff; }
+  .bg-bg-l3 { background-color: #f8fafc; }
+
+  .bg-grey-10 { background-color: #f1f5f9; }
+  .bg-grey-15 { background-color: #e2e8f0; }
+  .bg-grey-20 { background-color: #cbd5e1; }
+
+  // ---- text ---------------------------------------------------------------
+  .text-grey-90 { color: #0f172a; }
+  .text-grey-70 { color: #334155; }
+  .text-grey-60 { color: #475569; }
+  .text-grey-40 { color: #64748b; }
+  .text-grey-20 { color: #94a3b8; }
+
+  // ---- borders ------------------------------------------------------------
+  .border-grey-10 { border-color: #e2e8f0; }
+  .border-grey-15 { border-color: #e2e8f0; }
+  .border-grey-20 { border-color: #cbd5e1; }
+  .border-b-grey-10 { border-bottom-color: #e2e8f0; }
+  .border-t-grey-20 { border-top-color: #e2e8f0; }
+  .divide-grey-10 > :not([hidden]) ~ :not([hidden]) { border-color: #e2e8f0; }
+
+  // ---- brand tints on light ----------------------------------------------
+  .bg-brand-5 { background-color: #fee9e9; }
+  .bg-brand-10 { background-color: #f9d5d5; }
+  .border-brand-10 { border-color: #f0b4b4; }
+  .bg-accent-green-5 { background-color: #f0fdf4; }
+  .bg-accent-green-10 { background-color: #dcfce7; }
+  .border-accent-green-10 { border-color: #bbf7d0; }
+  .bg-accent-red-5 { background-color: #fef2f2; }
+  .bg-accent-red-10 { background-color: #fee2e2; }
+  .border-accent-red-10 { border-color: #fecaca; }
+
+  // ---- gradients ----------------------------------------------------------
+  .bg-card-border-top {
+    background-image: linear-gradient(180deg, #e2e8f0 0%, rgba(226, 232, 240, 0) 100%);
+  }
+  .bg-card-border-bottom {
+    background-image: linear-gradient(180deg, rgba(226, 232, 240, 0) 0%, #e2e8f0 100%);
+  }
+  .bg-live-game-shadow {
+    background-image: linear-gradient(90deg, rgba(220, 38, 38, 0.12) 0%, rgba(255, 255, 255, 0) 100%);
+  }
+  .bg-betslip-item-bg {
+    background-image: linear-gradient(90.08deg, #ffffff 0.06%, #fff5f5 300%);
+  }
+  .bg-betslip-item-bg-inc {
+    background-image: linear-gradient(90.08deg, #ffffff 0.06%, #f0fdf4 300%);
+  }
+  .bg-betslip-item-bg-dec {
+    background-image: linear-gradient(90.08deg, #ffffff 0.06%, #fef2f2 300%);
+  }
+
+  // ---- skeleton -----------------------------------------------------------
+  .bone {
+    background-color: #e2e8f0;
+    animation: none;
+  }
+
+  // ---- hover / group-hover variants used inside the workspace -------------
+  .hover\:text-grey-90:hover { color: #0f172a; }
+  .hover\:text-grey-70:hover { color: #334155; }
+  .hover\:text-grey-60:hover { color: #475569; }
+  .hover\:border-grey-40:hover { border-color: #64748b; }
+  .hover\:border-grey-20:hover { border-color: #cbd5e1; }
+  .hover\:bg-grey-15:hover { background-color: #e2e8f0; }
+  .hover\:bg-grey-10:hover { background-color: #f1f5f9; }
+
+  .group:hover .group-hover\:bg-grey-15 { background-color: #e2e8f0; }
+  .group:hover .group-hover\:text-grey-90 { color: #0f172a; }
+  .group:hover .group-hover\:bg-grey-10 { background-color: #f1f5f9; }
+
+  // ---- shadows ------------------------------------------------------------
+  .shadow-panel { box-shadow: 0 10px 30px rgba(15, 23, 42, 0.10); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

@@ -409,19 +409,19 @@ type NavbarProps = {
 
 const Navbar: React.FC<NavbarProps> = ({ activeType, onClick }) => {
   return (
-    <div className="flex items-center space-x-2 px-3">
+    <div className="flex items-center gap-1 p-1 bg-grey-10 rounded-ssm overflow-x-auto no-scrollbar w-fit">
       {
         tabs.map(({ title, value }) => {
           const isActive = activeType === value
 
-          const className = cx('flex items-center p-1 cursor-pointer', {
+          const className = cx('flex items-center px-3 h-8 rounded-ssm cursor-pointer text-caption-13 font-semibold whitespace-nowrap transition-colors', {
+            'text-white bg-navy-900 shadow-sm': isActive,
             'text-grey-60 hover:text-grey-90': !isActive,
-            'text-grey-90': isActive,
           })
 
           return (
             <button key={value || 'all'} className={className} onClick={() => onClick(value)}>
-              <Message className="text-caption-13 font-semibold" value={title} />
+              <Message value={title} />
             </button>
           )
         })
