@@ -65,8 +65,9 @@ const ConnectModal: ModalComponent<ConnectModalProps> = (props) => {
 
   let content: ReactNode
 
-  const walletIcon = variables?.connector?.icon
-  const walletName = variables?.connector?.name
+  const resolvedConnector = variables?.connector && typeof variables.connector === 'object' ? variables.connector : null
+  const walletIcon = resolvedConnector?.icon
+  const walletName = resolvedConnector?.name
 
   if (isPending) {
     content = (
