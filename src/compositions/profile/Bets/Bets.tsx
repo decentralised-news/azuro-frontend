@@ -13,6 +13,7 @@ import { useEntry } from '@locmod/intersection-observer'
 import { type InfiniteData, type UseInfiniteQueryResult } from '@tanstack/react-query'
 import { type Address } from 'viem'
 import { toLocaleString } from 'helpers'
+import { getRecordedBetPayout } from 'helpers/betAmounts'
 import { getGameDateTime } from 'helpers/getters'
 
 import { Icon, type IconName } from 'components/ui'
@@ -199,7 +200,7 @@ type BetProps = {
 const Bet: React.FC<BetProps> = ({ bet }) => {
   const {
     createdAt, status: graphBetStatus, amount, outcomes, orderState,
-    payout, cashout, possibleWin, freebetId, txHash,
+    payout, settledPayout, cashout, possibleWin, freebetId, txHash,
     isWin, isLose, isCanceled, isRedeemed, isCashedOut,
   } = bet
 
@@ -234,9 +235,11 @@ const Bet: React.FC<BetProps> = ({ bet }) => {
     }
 
     if (isWin) {
+      const winningPayout = getRecordedBetPayout({ settledPayout, payout })
+
       return {
         resultTitle: messages.winning,
-        resultAmount: `${toLocaleString(payout || possibleWin, { digits: 2 })} ${betToken.symbol}`,
+        resultAmount: winningPayout === null ? '––' : `${toLocaleString(winningPayout, { digits: 2 })} ${betToken.symbol}`,
       }
     }
 
@@ -258,7 +261,7 @@ const Bet: React.FC<BetProps> = ({ bet }) => {
       resultTitle: messages.possibleWin,
       resultAmount: `${toLocaleString(possibleWin, { digits: 2 })} ${betToken.symbol}`,
     }
-  }, [ isCashedOut ])
+  }, [ isCashedOut, cashout, isWin, isLose, isCanceled, amount, settledPayout, payout, possibleWin, betToken.symbol ])
 
   const handleRedeem = async () => {
     try {

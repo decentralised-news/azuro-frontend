@@ -9,6 +9,7 @@ import { useAccount } from '@azuro-org/sdk-social-aa-connector'
 import { openModal } from '@locmod/modal'
 import localStorage from '@locmod/local-storage'
 import { constants, isUserRejectedRequestError, toLocaleString } from 'helpers'
+import { getBetPreviewPayout } from 'helpers/betAmounts'
 
 import { Icon } from 'components/ui'
 import { buttonMessages } from 'components/inputs'
@@ -36,8 +37,12 @@ const BetButton: React.FC<BetButtonProps> = ({ isEnoughBalance, isBalanceFetchin
   }
 
   const slippage = +(localStorage.getItem(constants.localStorageKeys.slippage) as string || constants.defaultSlippage)
-  const diff = selectedFreebet && selectedFreebet.params.isSponsoredBetReturnable ? +selectedFreebet.amount : 0
-  const possibleWin = toLocaleString(totalOddsRef.current * +betAmount - diff, { digits: 2 })
+  const possibleWin = toLocaleString(getBetPreviewPayout({
+    amount: betAmount,
+    totalOdds: totalOddsRef.current,
+    decimals: betToken.decimals,
+    freebet: selectedFreebet,
+  }), { digits: 2 })
 
   const {
     submit,

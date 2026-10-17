@@ -2,7 +2,7 @@
   "name": "sdk-example",
   "version": "3.0.0",
   "engines": {
-    "node": ">=22.11.0"
+    "node": ">=22.12.0"
   },
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
     "build": "npm run build-icons && next build",
     "start": "next start",
     "lint-ts": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
     "lint": "next lint && tsc --noEmit",
     "------  Icons --------------------------------------------------------------------------": "",
     "watch-icons": "node bin/icons --watch",
@@ -17,9 +18,9 @@
   },
   "dependencies": {
     "@azuro-org/dictionaries": "^3.0.29",
-    "@azuro-org/sdk": "8.0.0",
+    "@azuro-org/sdk": "8.2.0",
     "@azuro-org/sdk-social-aa-connector": "^1.1.8",
-    "@azuro-org/toolkit": "7.0.0",
+    "@azuro-org/toolkit": "7.2.0",
     "@babel/core": "^7.28.3",
     "@bigmi/react": "^0.6.0",
     "@floating-ui/react-dom-interactions": "^0.13.3",
