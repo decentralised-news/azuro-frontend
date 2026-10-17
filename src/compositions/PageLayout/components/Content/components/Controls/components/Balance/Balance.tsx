@@ -112,11 +112,17 @@ const BalanceInfo: React.FC = () => {
   const { appChain, betToken } = useChain()
   const { data: balanceData, isLoading: isBalanceFetching } = useBetTokenBalance()
   const { data: nativeBalanceData, isLoading: isNativeBalanceFetching } = useNativeBalance()
-  const { data: betsSummaryData, isLoading: isBetsSummaryFetching } = useBetsSummary({
-    account: address!,
+  const { data: betsSummaryData, isLoading: isBetsSummaryFetching, isError: isBetsSummaryError } = useBetsSummary({
+    account: address || '',
+    query: {
+      enabled: Boolean(address),
+      // Never carry a previous wallet's or chain's totals into this summary.
+      placeholderData: () => undefined,
+    },
   })
 
-  const { inBets, toPayout } = betsSummaryData || {}
+  const { inBets, withdrawable } = betsSummaryData || {}
+  const isSummaryUnavailable = isBetsSummaryError || !betsSummaryData
   const { balance } = balanceData || {}
   const { balance: nativeBalance } = nativeBalanceData || {}
 
@@ -147,6 +153,8 @@ const BalanceInfo: React.FC = () => {
           {
             isBetsSummaryFetching ? (
               <div className="bone h-4 w-10 rounded-full" />
+            ) : isSummaryUnavailable ? (
+              <Message className="text-caption-13 text-grey-60" value={messages.unavailable} />
             ) : (
               <div className="text-caption-13 font-semibold">
                 {toLocaleString(inBets || 0, { digits: 2 })} {betToken.symbol}
@@ -159,14 +167,23 @@ const BalanceInfo: React.FC = () => {
           {
             isBetsSummaryFetching ? (
               <div className="bone h-4 w-10 rounded-full" />
+            ) : isSummaryUnavailable ? (
+              <Message className="text-caption-13 text-grey-60" value={messages.unavailable} />
             ) : (
               <div className="text-caption-13 font-semibold">
-                {toLocaleString(toPayout || 0, { digits: 2 })} {betToken.symbol}
+                {toLocaleString(withdrawable || 0, { digits: 2 })} {betToken.symbol}
               </div>
             )
           }
         </div>
       </div>
+      {
+        isBetsSummaryError && (
+          <div className="px-3 pb-2 text-caption-12 text-grey-60" role="status">
+            <Message value={messages.summaryUnavailable} />
+          </div>
+        )
+      }
     </div>
   )
 }
